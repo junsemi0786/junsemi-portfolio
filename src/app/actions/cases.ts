@@ -24,6 +24,7 @@ export async function deleteCaseAction(id: string) {
     await deleteCase(id);
     revalidatePath('/cases');
     revalidatePath('/admin/cases');
+    redirect('/admin/cases');
 }
 
 export async function reorderCasesAction(orderedIds: string[]) {

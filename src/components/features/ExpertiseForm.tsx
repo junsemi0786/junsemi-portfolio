@@ -78,7 +78,7 @@ export default function ExpertiseForm({ initialData, onSubmit, isEditing = false
     return (
         <form onSubmit={handleSubmit} className="form-container" style={{ maxWidth: '800px', margin: '0 auto' }}>
             <div className="form-group" style={{ marginBottom: '1.5rem' }}>
-                <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600 }}>ID (고유 식별자, 예: wet-process) *</label>
+                <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600 }}>ID (고유 식별자, 영문 소문자/숫자/하이픈 권장, 띄어쓰기 금지) *</label>
                 <input
                     type="text"
                     name="id"
