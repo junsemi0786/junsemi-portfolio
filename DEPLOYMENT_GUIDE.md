@@ -49,4 +49,4 @@ Since you use Google Workspace, you must be careful **NOT** to touch your MX rec
 ## 5. Verification
 - Wait for DNS propagation (can take minutes to hours).
 - Visit your domain.
-- Verify SSL (HTTPS) is active (Vercel handles this automatically).
+- Verify SSL (HTTPS) is active (Vercel handles this automatically)..
