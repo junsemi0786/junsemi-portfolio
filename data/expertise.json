@@ -66,19 +66,5 @@
     "iconType": "scada",
     "order": 3,
     "updatedAt": "2024-01-01T00:00:00.000Z"
-  },
-  {
-    "id": "single-wet-process",
-    "title": "single",
-    "subtitle": "wet",
-    "description": "wet",
-    "imageSrc": "/images/solution-semicon-real.png",
-    "keywords": [
-      "wet"
-    ],
-    "features": [],
-    "iconType": "default",
-    "order": 0,
-    "updatedAt": "2026-02-08T09:08:44.534Z"
   }
 ]

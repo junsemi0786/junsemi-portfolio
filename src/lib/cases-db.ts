@@ -19,8 +19,15 @@ export async function getCases(): Promise<CaseStudy[]> {
     const fileContent = await fs.readFile(DATA_FILE_PATH, 'utf-8');
     try {
         const cases = JSON.parse(fileContent) as CaseStudy[];
-        // Sort by order by default
-        return cases.sort((a, b) => a.order - b.order);
+        // Normalize data to ensure type safety
+        const normalized = cases.map(c => ({
+            ...c,
+            order: typeof c.order === 'number' ? c.order : 0,
+            tags: Array.isArray(c.tags) ? c.tags : [],
+            gallery: Array.isArray(c.gallery) ? c.gallery : [],
+        }));
+        // Sort by order with safe fallback
+        return normalized.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
     } catch (error) {
         console.error('Failed to parse cases.json', error);
         return [];

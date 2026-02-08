@@ -18,7 +18,14 @@ export async function getExpertiseList(): Promise<TechnicalExpertise[]> {
     const fileContent = await fs.readFile(DATA_FILE_PATH, 'utf-8');
     try {
         const list = JSON.parse(fileContent) as TechnicalExpertise[];
-        return list.sort((a, b) => a.order - b.order);
+        // Normalize data to ensure type safety
+        const normalized = list.map(item => ({
+            ...item,
+            order: typeof item.order === 'number' ? item.order : 0,
+            keywords: Array.isArray(item.keywords) ? item.keywords : [],
+            features: Array.isArray(item.features) ? item.features : [],
+        }));
+        return normalized.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
     } catch (error) {
         console.error('Failed to parse expertise.json', error);
         return [];

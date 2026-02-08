@@ -1,7 +1,8 @@
 [
   {
+    "id": "aec06e00-e44f-4b78-a0de-f13f69bce13e",
     "clientName": "Onsemi",
-    "projectName": "장버 전면 슬라이딩도어 설치",
+    "projectName": "장비 전면 슬라이딩도어 설치",
     "period": "2024.08 - 2024.09",
     "tags": [
       "ETCH",
@@ -17,9 +18,8 @@
     "outcome": "PARTICLE 개선",
     "status": "published",
     "order": 0,
-    "id": "aec06e00-e44f-4b78-a0de-f13f69bce13e",
     "createdAt": "2026-02-08T08:51:10.658Z",
-    "updatedAt": "2026-02-08T08:51:36.008Z"
+    "updatedAt": "2026-02-08T23:22:00.639Z"
   },
   {
     "id": "case-1",
@@ -32,6 +32,7 @@
       "SCADA"
     ],
     "thumbnailUrl": "/images/ccss.jpg",
+    "gallery": [],
     "summary": "Chemical Supply system. 약품 중앙 공급장치 모니터링 시스템 구축. SCADA Cimon.",
     "description": "## 문제점\n중앙 모니터 시스템. 추가 시 고가의 비용문제 해결. Cimon scada 로 변경.\n\n## 해결책\nCimon scada 로 변경. \n\n## 결과\n오류를 30% 비용 절감",
     "outcome": "",
@@ -51,35 +52,16 @@
       "chemical"
     ],
     "thumbnailUrl": "/images/sat1.jpg",
+    "gallery": [
+      "/images/sat2.jpg",
+      "/images/sat3.jpg"
+    ],
     "summary": "Local 공급장치. 전장작업 및 Software Program",
     "description": "## 프로젝트 개요\nOnsemi SAT chemical Etching 장비에 Local 약품공급장치 납품\n\n## 주요 기능\n- 온도 Control\n- SC1 농도 Control 공급\n- Data Backup",
     "outcome": "",
     "status": "published",
     "order": 2,
     "createdAt": "2024-05-20T10:00:00.000Z",
-    "updatedAt": "2026-02-01T10:16:08.746Z",
-    "gallery": [
-      "/images/sat2.jpg",
-      "/images/sat3.jpg"
-    ]
-  },
-  {
-    "clientName": "test",
-    "projectName": "tesdet",
-    "period": "est",
-    "tags": [],
-    "thumbnailUrl": "/images/project-p1.png",
-    "gallery": [
-      "/images/sat2.jpg",
-      "/images/sat2.jpg"
-    ],
-    "summary": "tes",
-    "description": "test",
-    "outcome": "set",
-    "status": "published",
-    "order": 0,
-    "id": "a9a5aa25-d7db-432a-aff5-ce3dbb5739c4",
-    "createdAt": "2026-02-08T08:52:07.464Z",
-    "updatedAt": "2026-02-08T08:52:07.464Z"
+    "updatedAt": "2026-02-01T10:16:08.746Z"
   }
 ]
