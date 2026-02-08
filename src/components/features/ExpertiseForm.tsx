@@ -28,8 +28,11 @@ export default function ExpertiseForm({ initialData, onSubmit, isEditing = false
     const [featureInput, setFeatureInput] = useState('');
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
+        const { name, value, type } = e.target;
+        setFormData(prev => ({
+            ...prev,
+            [name]: type === 'number' ? Number(value) : value
+        }));
     };
 
     const handleAddKeyword = (e: React.KeyboardEvent) => {

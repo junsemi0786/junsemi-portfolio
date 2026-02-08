@@ -29,8 +29,11 @@ export default function CaseForm({ initialData, onSubmit, isEditing = false }: C
     const [tagInput, setTagInput] = useState('');
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
+        const { name, value, type } = e.target;
+        setFormData(prev => ({
+            ...prev,
+            [name]: type === 'number' ? Number(value) : value
+        }));
     };
 
     const handleAddTag = (e: React.KeyboardEvent) => {
@@ -122,7 +125,12 @@ export default function CaseForm({ initialData, onSubmit, isEditing = false }: C
                     type="text"
                     name="gallery"
                     value={formData.gallery?.join(', ') || ''}
-                    onChange={(e) => setFormData(prev => ({ ...prev, gallery: e.target.value.split(',').map(s => s.trim()) }))}
+                    onChange={(e) => {
+                        const paths = e.target.value.split(',')
+                            .map(s => s.trim())
+                            .filter(s => s !== '');
+                        setFormData(prev => ({ ...prev, gallery: paths }));
+                    }}
                     placeholder="/images/detail1.jpg, /images/detail2.jpg"
                     style={{ width: '100%', padding: '10px', borderRadius: '4px', border: '1px solid #444', background: '#222', color: 'white' }}
                 />
@@ -185,17 +193,29 @@ export default function CaseForm({ initialData, onSubmit, isEditing = false }: C
                 />
             </div>
 
-            <div className="form-group" style={{ marginBottom: '2rem' }}>
-                <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600 }}>Status</label>
-                <select
-                    name="status"
-                    value={formData.status}
-                    onChange={handleChange}
-                    style={{ width: '100%', padding: '10px', borderRadius: '4px', border: '1px solid #444', background: '#222', color: 'white' }}
-                >
-                    <option value="draft">Draft (Hidden)</option>
-                    <option value="published">Published (Visible)</option>
-                </select>
+            <div className="grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '2rem' }}>
+                <div className="form-group">
+                    <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600 }}>Status</label>
+                    <select
+                        name="status"
+                        value={formData.status}
+                        onChange={handleChange}
+                        style={{ width: '100%', padding: '10px', borderRadius: '4px', border: '1px solid #444', background: '#222', color: 'white' }}
+                    >
+                        <option value="draft">Draft (Hidden)</option>
+                        <option value="published">Published (Visible)</option>
+                    </select>
+                </div>
+                <div className="form-group">
+                    <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600 }}>Display Order (Number)</label>
+                    <input
+                        type="number"
+                        name="order"
+                        value={formData.order}
+                        onChange={handleChange}
+                        style={{ width: '100%', padding: '10px', borderRadius: '4px', border: '1px solid #444', background: '#222', color: 'white' }}
+                    />
+                </div>
             </div>
 
             <div className="actions" style={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem' }}>
