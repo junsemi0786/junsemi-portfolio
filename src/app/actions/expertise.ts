@@ -23,4 +23,5 @@ export async function deleteExpertiseAction(id: string) {
     await deleteExpertise(id);
     revalidatePath('/expertise');
     revalidatePath('/admin/expertise');
+    redirect('/admin/expertise');
 }
