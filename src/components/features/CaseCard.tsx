@@ -23,7 +23,7 @@ export default function CaseCard({ caseStudy }: CaseCardProps) {
                     <div className={styles.placeholder} />
                 )}
                 <div className={styles.overlay}>
-                    <span className={styles.viewMore}>View Case Study</span>
+                    <span className={styles.viewMore}>자세히 보기</span>
                 </div>
             </div>
             <div className={styles.content}>

@@ -4,6 +4,8 @@ import CaseCard from '@/components/features/CaseCard';
 export const metadata = {
     title: 'Cases | Major Achievements',
     description: 'Explore our portfolio of successful projects and engineering solutions.',
+    title: 'Cases | 주요 실적',
+    description: '성공적인 프로젝트와 엔지니어링 솔루션 포트폴리오를 확인해보세요.',
 };
 
 export default async function CasesPage() {
@@ -17,10 +19,13 @@ export default async function CasesPage() {
                     <div style={{ marginBottom: '4rem', textAlign: 'center' }}>
                         <h1 className="text-gradient" style={{ fontSize: '3rem', marginBottom: '1rem' }}>
                             Our Works
+                            주요 실적
                         </h1>
                         <p className="text-secondary" style={{ maxWidth: '600px', margin: '0 auto' }}>
                             Turning complex problems into elegant engineering solutions.
                             Here are some of our key projects that made a difference.
+                            복잡한 문제를 우아한 엔지니어링 솔루션으로 해결합니다.
+                            변화를 만들어낸 주요 프로젝트들을 소개합니다.
                         </p>
                     </div>
 
@@ -36,6 +41,7 @@ export default async function CasesPage() {
                         {publishedCases.length === 0 && (
                             <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '4rem' }}>
                                 <p>No published cases yet.</p>
+                                <p>아직 등록된 실적이 없습니다.</p>
                             </div>
                         )}
                     </div>
