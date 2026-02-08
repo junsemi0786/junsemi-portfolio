@@ -1,0 +1,20 @@
+{
+  "hero": {
+    "badge": "Engineered Precision",
+    "titleLine1": "Smart Engineering",
+    "titleLine2": "For Future Industry",
+    "description": "반도체 장비 리퍼비시 개조,개선. 관공서 SCADA & PLC 유지보수까지.\n생산 현장 문제를 기술과 데이터로 해결합니다."
+  },
+  "stats": {
+    "yearsExp": "15+",
+    "yearsLabel": "Years Exp",
+    "successRate": "100%",
+    "successLabel": "Success Rate",
+    "support": "24h",
+    "supportLabel": "Support"
+  },
+  "cta": {
+    "title": "엔지니어링의 미래를 경험하세요",
+    "description": "복잡한 산업 현장의 문제를 해결하고, 생산성을 극대화하는 맞춤형 솔루션을 제공합니다."
+  }
+}

@@ -1,0 +1,84 @@
+[
+  {
+    "id": "wet-process",
+    "subtitle": "Semiconductor Equipment",
+    "title": "반도체 WET Process Solution",
+    "description": "반도체 WET Process 장비의 전문적인 리퍼비시 및 유지보수를 수행합니다. FSI Mercury MP, Inno-max Single Etcher 등 주요 장비에 대한 고도의 기술력을 보유하고 있습니다.",
+    "imageSrc": "/images/solution-semicon-real.png",
+    "keywords": [
+      "FSI Mercury MP",
+      "Spray Etch",
+      "Single Etcher",
+      "Immersion",
+      "Refurbish"
+    ],
+    "features": [
+      "FSI Mercury MP Refurbish 및 고장 수리",
+      "Inno-max Single Etcher 'ASTRO' 기술 지원",
+      "Immersion Process 'Traum' 장비 개조",
+      "부식 방지(Modify) 및 단종 부품 대응"
+    ],
+    "iconType": "semicon",
+    "order": 1,
+    "updatedAt": "2024-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "plc-hmi",
+    "subtitle": "Industrial Automation",
+    "title": "PLC & Touch Panel (System Control)",
+    "description": "다양한 제조사의 PLC 및 HMI 시스템을 능숙하게 다룹니다. Omron, LS산전 등 레거시 시스템부터 최신 터치 패널까지 완벽한 제어 솔루션을 제공합니다.",
+    "imageSrc": "/images/solution-automation-real.png",
+    "keywords": [
+      "Omron",
+      "LS Electric",
+      "Proface",
+      "EasyView",
+      "Touch Panel"
+    ],
+    "features": [
+      "Omron / LS Electric PLC 프로그램 설계",
+      "Touch Panel 작화 (Proface, EasyView, Top)",
+      "노후 제어 시스템 교체 및 마이그레이션",
+      "Servo 모터 제어 및 정밀 튜닝"
+    ],
+    "iconType": "automation",
+    "order": 2,
+    "updatedAt": "2024-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "scada",
+    "subtitle": "Monitoring System",
+    "title": "Cimon SCADA Solution",
+    "description": "Cimon SCADA 전문 엔지니어링을 통해 안정적이고 효율적인 원격 감시 제어 시스템을 구축합니다.",
+    "imageSrc": "/images/solution-scada-real.png",
+    "keywords": [
+      "Cimon SCADA",
+      "Monitoring",
+      "Database",
+      "Remote Control"
+    ],
+    "features": [
+      "Cimon SCADA 기반 감시 제어 시스템 구축",
+      "실시간 데이터 수집 및 트렌드 분석",
+      "경보(Alarm) 시스템 및 원격 제어",
+      "Database 연동 및 보고서 기능"
+    ],
+    "iconType": "scada",
+    "order": 3,
+    "updatedAt": "2024-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "Single WET Process",
+    "title": "single",
+    "subtitle": "wet",
+    "description": "wet",
+    "imageSrc": "/images/solution-semicon-real.png",
+    "keywords": [
+      "wet"
+    ],
+    "features": [],
+    "iconType": "default",
+    "order": 0,
+    "updatedAt": "2026-02-08T09:08:44.534Z"
+  }
+]

@@ -1,0 +1,103 @@
+.footer {
+    background-color: var(--color-primary-dark);
+    color: var(--color-text-inverse);
+    padding: 64px 0 32px;
+    font-size: 0.95rem;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+}
+
+.topSection {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.brand {
+    max-width: 350px;
+}
+
+.logoWrapper {
+    margin-bottom: 20px;
+}
+
+.address {
+    font-style: normal;
+    color: #a0aec0;
+    line-height: 1.8;
+    font-size: 0.9rem;
+}
+
+.address p {
+    margin-bottom: 4px;
+}
+
+.links {
+    display: flex;
+    gap: 60px;
+}
+
+.column h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.column ul {
+    list-style: none;
+}
+
+.column ul li {
+    margin-bottom: 12px;
+}
+
+.column ul li a {
+    color: #a0aec0;
+    transition: color 0.2s;
+}
+
+.column ul li a:hover {
+    color: var(--color-accent);
+}
+
+.bottomSection {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 32px;
+    display: flex;
+    justify-content: space-between;
+    color: #718096;
+    font-size: 0.85rem;
+}
+
+.legal {
+    display: flex;
+    gap: 20px;
+}
+
+.legal a:hover {
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .topSection {
+        flex-direction: column;
+    }
+
+    .links {
+        flex-direction: column;
+        gap: 32px;
+    }
+
+    .bottomSection {
+        flex-direction: column;
+        gap: 16px;
+        align-items: center;
+        text-align: center;
+    }
+}

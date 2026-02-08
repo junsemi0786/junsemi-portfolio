@@ -1,0 +1,85 @@
+[
+  {
+    "clientName": "Onsemi",
+    "projectName": "장버 전면 슬라이딩도어 설치",
+    "period": "2024.08 - 2024.09",
+    "tags": [
+      "ETCH",
+      "SLIDING DOOR"
+    ],
+    "thumbnailUrl": "/images/ccss.jpg ",
+    "gallery": [
+      "/images/sat2.jpg",
+      "/images/sat2.jpg"
+    ],
+    "summary": "PARTICLE 관련하여 전면에 슬라이딩 도어를 추가 설치함.",
+    "description": "Particle 관련 이슈로 인하여 전면 Sliding door 설치함. 일정시간 open시에 자동으로 sliding door close.",
+    "outcome": "PARTICLE 개선",
+    "status": "published",
+    "order": 0,
+    "id": "aec06e00-e44f-4b78-a0de-f13f69bce13e",
+    "createdAt": "2026-02-08T08:51:10.658Z",
+    "updatedAt": "2026-02-08T08:51:36.008Z"
+  },
+  {
+    "id": "case-1",
+    "clientName": "원이엔지",
+    "projectName": "Chemical Center Supply system Monitoring SCADA",
+    "period": "2025.08 - 2025.09",
+    "tags": [
+      "CCSS",
+      "Chemical",
+      "SCADA"
+    ],
+    "thumbnailUrl": "/images/ccss.jpg ",
+    "summary": "Chemical Supply system. 약품 중앙 공급장치 모니터링 시스템 구축. SCADA Cimon.",
+    "description": "## 문제점\n중앙 모니터 시스템. 추가 시 고가의 비용문제 해결. Cimon scada 로 변경.\n\n## 해결책\nCimon scada 로 변경. \n\n## 결과\n오류를 30% 비용 절감",
+    "outcome": "",
+    "status": "published",
+    "order": 1,
+    "createdAt": "2024-01-15T09:00:00.000Z",
+    "updatedAt": "2026-01-31T17:02:05.450Z"
+  },
+  {
+    "id": "case-2",
+    "clientName": "Onsemi",
+    "projectName": "Local Chemical Supply System For SAT",
+    "period": "2024.09 - 2024.12",
+    "tags": [
+      "SAT",
+      "LCSS",
+      "chemical"
+    ],
+    "thumbnailUrl": "/images/sat1.jpg",
+    "summary": "Local 공급장치. 전장작업 및 Software Program",
+    "description": "## 프로젝트 개요\nOnsemi SAT chemical Etching 장비에 Local 약품공급장치 납품\n\n## 주요 기능\n- 온도 Control\n- SC1 농도 Control 공급\n- Data Backup",
+    "outcome": "",
+    "status": "published",
+    "order": 2,
+    "createdAt": "2024-05-20T10:00:00.000Z",
+    "updatedAt": "2026-02-01T10:16:08.746Z",
+    "gallery": [
+      "/images/sat2.jpg",
+      "/images/sat3.jpg"
+    ]
+  },
+  {
+    "clientName": "test",
+    "projectName": "tesdet",
+    "period": "est",
+    "tags": [],
+    "thumbnailUrl": "/case-images/logistics-dashboard.jpg",
+    "gallery": [
+      "/images/sat2.jpg",
+      "/images/sat2.jpg"
+    ],
+    "summary": "tes",
+    "description": "test",
+    "outcome": "set",
+    "status": "published",
+    "order": 0,
+    "id": "a9a5aa25-d7db-432a-aff5-ce3dbb5739c4",
+    "createdAt": "2026-02-08T08:52:07.464Z",
+    "updatedAt": "2026-02-08T08:52:07.464Z"
+  }
+]

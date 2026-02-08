@@ -1,0 +1,134 @@
+.card {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: var(--border-radius-lg);
+    padding: 40px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 51, 102, 0.08);
+    border-color: rgba(0, 51, 102, 0.2);
+}
+
+.header {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.iconWrapper {
+    width: 60px;
+    height: 60px;
+    background: var(--color-bg-secondary);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary);
+    flex-shrink: 0;
+}
+
+.defaultIcon {
+    width: 24px;
+    height: 24px;
+    background-color: var(--color-primary);
+}
+
+.titleWrapper {
+    flex: 1;
+}
+
+.subtitle {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-primary-dark);
+    line-height: 1.3;
+}
+
+.body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.description {
+    color: var(--color-text-secondary);
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+
+.keywords {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 32px;
+}
+
+.keyword {
+    font-size: 0.8rem;
+    background: var(--color-bg-secondary);
+    padding: 4px 10px;
+    border-radius: 20px;
+    color: var(--color-text-secondary);
+    font-weight: 500;
+}
+
+.features {
+    margin-top: auto;
+    padding-top: 24px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.featureTitle {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--color-text-main);
+}
+
+.featureList {
+    list-style: none;
+}
+
+.featureItem {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+}
+
+.check {
+    color: var(--color-accent);
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .card {
+        padding: 24px;
+    }
+
+    .header {
+        flex-direction: column;
+        gap: 16px;
+    }
+}
