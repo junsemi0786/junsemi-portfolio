@@ -7,10 +7,10 @@
       "ETCH",
       "SLIDING DOOR"
     ],
-    "thumbnailUrl": "/images/ccss.jpg ",
+    "thumbnailUrl": "/images/ccss.JPG",
     "gallery": [
-      "/images/sat2.jpg",
-      "/images/sat2.jpg"
+      "/images/sat2.JPG",
+      "/images/sat2.JPG"
     ],
     "summary": "PARTICLE 관련하여 전면에 슬라이딩 도어를 추가 설치함.",
     "description": "Particle 관련 이슈로 인하여 전면 Sliding door 설치함. 일정시간 open시에 자동으로 sliding door close.",
@@ -31,7 +31,7 @@
       "Chemical",
       "SCADA"
     ],
-    "thumbnailUrl": "/images/ccss.jpg ",
+    "thumbnailUrl": "/images/ccss.JPG",
     "summary": "Chemical Supply system. 약품 중앙 공급장치 모니터링 시스템 구축. SCADA Cimon.",
     "description": "## 문제점\n중앙 모니터 시스템. 추가 시 고가의 비용문제 해결. Cimon scada 로 변경.\n\n## 해결책\nCimon scada 로 변경. \n\n## 결과\n오류를 30% 비용 절감",
     "outcome": "",
@@ -50,7 +50,7 @@
       "LCSS",
       "chemical"
     ],
-    "thumbnailUrl": "/images/sat1.jpg",
+    "thumbnailUrl": "/images/sat1.JPG",
     "summary": "Local 공급장치. 전장작업 및 Software Program",
     "description": "## 프로젝트 개요\nOnsemi SAT chemical Etching 장비에 Local 약품공급장치 납품\n\n## 주요 기능\n- 온도 Control\n- SC1 농도 Control 공급\n- Data Backup",
     "outcome": "",
@@ -59,8 +59,8 @@
     "createdAt": "2024-05-20T10:00:00.000Z",
     "updatedAt": "2026-02-01T10:16:08.746Z",
     "gallery": [
-      "/images/sat2.jpg",
-      "/images/sat3.jpg"
+      "/images/sat2.JPG",
+      "/images/sat3.JPG"
     ]
   },
   {
@@ -68,10 +68,10 @@
     "projectName": "tesdet",
     "period": "est",
     "tags": [],
-    "thumbnailUrl": "/case-images/logistics-dashboard.jpg",
+    "thumbnailUrl": "/images/project-p1.png",
     "gallery": [
-      "/images/sat2.jpg",
-      "/images/sat2.jpg"
+      "/images/sat2.JPG",
+      "/images/sat2.JPG"
     ],
     "summary": "tes",
     "description": "test",
