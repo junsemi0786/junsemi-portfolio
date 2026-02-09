@@ -8,12 +8,12 @@
       "ETCH",
       "SLIDING DOOR"
     ],
-    "thumbnailUrl": "/images/door4.jpg",
+    "thumbnailUrl": "/images/door5.jpg",
     "gallery": [
-      "/images/door_before.jpg",
-      "/images/door1.jpg",
-      "/images/door2.jpg",
-      "/images/door3.jpg"
+      "/images/door6.jpg",
+      "/images/door7.jpg",
+      "/images/door8.jpg",
+      "/images/door9.jpg"
     ],
     "summary": "PARTICLE 관련하여 전면에 슬라이딩 도어를 추가 설치함.",
     "description": "Particle 관련 이슈로 인하여 전면 Sliding door 설치함. 일정시간 open시에 자동으로 sliding door close.",
@@ -21,7 +21,7 @@
     "status": "published",
     "order": 0,
     "createdAt": "2026-02-08T08:51:10.658Z",
-    "updatedAt": "2026-02-09T16:13:16.109Z"
+    "updatedAt": "2026-02-09T16:18:45.779Z"
   },
   {
     "clientName": "Onsemi",
