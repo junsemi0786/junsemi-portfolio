@@ -63,7 +63,7 @@ export default async function CaseDetailPage(props: { params: Promise<{ id: stri
                     {/* Outcome Highlight */}
                     {caseStudy.outcome && (
                         <div className={styles.outcomeBox}>
-                            <h3 className={styles.outcomeTitle}>Key Outcome</h3>
+                            <h3 className={styles.outcomeTitle}>주요 성과</h3>
                             <p className={styles.outcomeText}>{caseStudy.outcome}</p>
                         </div>
                     )}
@@ -79,7 +79,7 @@ export default async function CaseDetailPage(props: { params: Promise<{ id: stri
                     </div>
 
                     <div className={styles.tagsSection}>
-                        <h3>Technologies Used</h3>
+                        <h3>사용 기술</h3>
                         <div className={styles.tagsWrapper}>
                             {caseStudy.tags.map(tag => (
                                 <span key={tag} className={styles.tag}>
@@ -94,7 +94,7 @@ export default async function CaseDetailPage(props: { params: Promise<{ id: stri
                 {/* Gallery Section */}
                 {caseStudy.gallery && caseStudy.gallery.length > 0 && (
                     <div className={styles.gallerySection}>
-                        <h3 className={styles.galleryTitle}>Project Gallery</h3>
+                        <h3 className={styles.galleryTitle}>프로젝트 갤러리</h3>
                         <div className={styles.galleryGrid}>
                             {caseStudy.gallery.map((imgSrc, index) => (
                                 <div key={index} className={styles.galleryItem}>
@@ -112,12 +112,12 @@ export default async function CaseDetailPage(props: { params: Promise<{ id: stri
 
                 {/* CTA Section */}
                 <div className={styles.ctaSection}>
-                    <h2 className={styles.ctaTitle}>Interested in a similar solution?</h2>
+                    <h2 className={styles.ctaTitle}>비슷한 솔루션이 필요하신가요?</h2>
                     <p className={styles.ctaText}>
-                        We can help you build success stories like {caseStudy.clientName}.
+                        {caseStudy.clientName}와 같은 성공 사례를 함께 만들어 드립니다.
                     </p>
                     <Button href="/contact" size="lg">
-                        Inquire about this project
+                        프로젝트 문의하기
                     </Button>
                 </div>
 
