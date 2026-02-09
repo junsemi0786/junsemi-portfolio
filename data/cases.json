@@ -48,30 +48,6 @@
   },
   {
     "clientName": "Onsemi",
-    "projectName": "약품 순환라인 Flow interlock 추가 개선 작업",
-    "period": "2024.08 - 2024.08",
-    "tags": [
-      "flowmeter",
-      "keyence",
-      "chemical flowmeter"
-    ],
-    "thumbnailUrl": "/images/flowmeter1.jpg ",
-    "gallery": [
-      "/images/flowmeter2.jpg",
-      "/images/flowmeter3.jpg",
-      "/images/flowmeter4.jpg"
-    ],
-    "summary": "chemical bath circulation line flow interlock 추가 개조개선",
-    "description": "배관 작업없이 keyence flowmeter 적용하여 순환 Line flow 알람 설정하여 풀질 불량 예방.",
-    "outcome": "이중알람 설치. 품질불량",
-    "status": "published",
-    "order": 0,
-    "id": "045de487-4168-4d0b-9806-29240b701b56",
-    "createdAt": "2026-02-09T11:59:22.700Z",
-    "updatedAt": "2026-02-09T15:46:29.220Z"
-  },
-  {
-    "clientName": "Onsemi",
     "projectName": "AL Spin Etcher Flow Meter 개조개선",
     "period": "2024.12 - 2024.12",
     "tags": [
@@ -93,6 +69,31 @@
     "id": "19af98d2-2a36-4688-8754-e2fa1d706ecb",
     "createdAt": "2026-02-09T12:10:08.919Z",
     "updatedAt": "2026-02-09T12:12:11.865Z"
+  },
+  {
+    "clientName": "Onsemi",
+    "projectName": "약품 순환라인 Flow interlock 추가 개선 작업",
+    "period": "2024.08 - 2024.08",
+    "tags": [
+      "flowmeter",
+      "keyence",
+      "chemical flowmeter",
+      "개조개선"
+    ],
+    "thumbnailUrl": "/images/flowmeter1.jpg",
+    "gallery": [
+      "/images/flowmeter2.jpg",
+      "/images/flowmeter3.jpg",
+      "/images/flowmeter4.jpg"
+    ],
+    "summary": "순환 라인에 flowmeter 설비 인터락 추가로 품질불량예방.",
+    "description": "배관 작업없이 keyence flowmeter 적용하여 순환 Line flow 알람 설정하여 풀질 불량 예방.",
+    "outcome": "",
+    "status": "published",
+    "order": 0,
+    "id": "8bb24c20-6472-4f93-9b0d-21562de48ea0",
+    "createdAt": "2026-02-09T15:53:38.378Z",
+    "updatedAt": "2026-02-09T15:54:18.299Z"
   },
   {
     "id": "case-1",
