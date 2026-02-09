@@ -22,25 +22,29 @@
     "updatedAt": "2026-02-09T11:52:29.501Z"
   },
   {
-    "clientName": "정수장",
-    "projectName": "CIMON SCADA 이중화 작업",
-    "period": "2025.07 - 2025.08",
+    "clientName": "Onsemi",
+    "projectName": "LCSS 장치 납품",
+    "period": "2024.10 - 2024.10",
     "tags": [
-      "test"
+      "Local장치",
+      "Chemical Supply장치"
     ],
     "thumbnailUrl": "/images/sat1.jpg",
     "gallery": [
       "/images/sat2.jpg",
-      "/images/sat2.jpg"
+      "/images/sat4.jpg",
+      "/images/sat5.jpg",
+      "/images/sat6.jpg",
+      "/images/sat7.jpg"
     ],
-    "summary": "test",
-    "description": "test",
-    "outcome": "test",
+    "summary": "SAT 장비 Local chemical supply 장치 납품",
+    "description": "약품공급장치 납품",
+    "outcome": "LCSS 장치",
     "status": "published",
     "order": 0,
     "id": "2a837588-d6a8-43c4-9ce1-ebf3587532bf",
     "createdAt": "2026-02-09T10:58:04.613Z",
-    "updatedAt": "2026-02-09T11:25:37.996Z"
+    "updatedAt": "2026-02-09T12:28:40.041Z"
   },
   {
     "clientName": "Onsemi",
@@ -57,14 +61,14 @@
       "/images/flowmeter3.jpg",
       "/images/flowmeter4.jpg"
     ],
-    "summary": "chemical bath circulation line flow interlock 추가 ",
+    "summary": "chemical bath circulation line flow interlock 추가 개조개선",
     "description": "배관 작업없이 keyence flowmeter 적용하여 순환 Line flow 알람 설정하여 풀질 불량 예방.",
     "outcome": "이중알람 설치. 품질불량",
     "status": "published",
     "order": 0,
     "id": "045de487-4168-4d0b-9806-29240b701b56",
     "createdAt": "2026-02-09T11:59:22.700Z",
-    "updatedAt": "2026-02-09T11:59:35.522Z"
+    "updatedAt": "2026-02-09T12:19:13.495Z"
   },
   {
     "clientName": "Onsemi",
