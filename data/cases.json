@@ -19,7 +19,76 @@
     "status": "published",
     "order": 0,
     "createdAt": "2026-02-08T08:51:10.658Z",
-    "updatedAt": "2026-02-08T23:22:00.639Z"
+    "updatedAt": "2026-02-09T11:52:29.501Z"
+  },
+  {
+    "clientName": "정수장",
+    "projectName": "CIMON SCADA 이중화 작업",
+    "period": "2025.07 - 2025.08",
+    "tags": [
+      "test"
+    ],
+    "thumbnailUrl": "/images/sat1.jpg",
+    "gallery": [
+      "/images/sat2.jpg",
+      "/images/sat2.jpg"
+    ],
+    "summary": "test",
+    "description": "test",
+    "outcome": "test",
+    "status": "published",
+    "order": 0,
+    "id": "2a837588-d6a8-43c4-9ce1-ebf3587532bf",
+    "createdAt": "2026-02-09T10:58:04.613Z",
+    "updatedAt": "2026-02-09T11:25:37.996Z"
+  },
+  {
+    "clientName": "Onsemi",
+    "projectName": "약품 순환라인 Flow interlock 추가 개선 작업",
+    "period": "2024.08 - 2024.08",
+    "tags": [
+      "flowmeter",
+      "keyence",
+      "chemical flowmeter"
+    ],
+    "thumbnailUrl": "/images/flowmeter1.jpg ",
+    "gallery": [
+      "/images/flowmeter2.jpg",
+      "/images/flowmeter3.jpg",
+      "/images/flowmeter4.jpg"
+    ],
+    "summary": "chemical bath circulation line flow interlock 추가 ",
+    "description": "배관 작업없이 keyence flowmeter 적용하여 순환 Line flow 알람 설정하여 풀질 불량 예방.",
+    "outcome": "이중알람 설치. 품질불량",
+    "status": "published",
+    "order": 0,
+    "id": "045de487-4168-4d0b-9806-29240b701b56",
+    "createdAt": "2026-02-09T11:59:22.700Z",
+    "updatedAt": "2026-02-09T11:59:35.522Z"
+  },
+  {
+    "clientName": "Onsemi",
+    "projectName": "AL Spin Etcher Flow Meter 개조개선",
+    "period": "2024.12 - 2024.12",
+    "tags": [
+      "개조개선",
+      "flowmeter",
+      "keyence"
+    ],
+    "thumbnailUrl": "/images/ase5.jpg",
+    "gallery": [
+      "/images/ase2.jpg",
+      "/images/ase3.jpg",
+      "/images/ase4.jpg"
+    ],
+    "summary": "배관개조없이 flowemeter 개조개선, chemical, DIW, Air gas monitoring 및 interlock 추가로 품지불량 예방.",
+    "description": "이중인터락, chemical, DIW, Air gas monitoring 및 interlock 추가로 품지불량 예방.",
+    "outcome": "이중알람 설치. 품질불량",
+    "status": "published",
+    "order": 0,
+    "id": "19af98d2-2a36-4688-8754-e2fa1d706ecb",
+    "createdAt": "2026-02-09T12:10:08.919Z",
+    "updatedAt": "2026-02-09T12:12:11.865Z"
   },
   {
     "id": "case-1",
@@ -32,14 +101,16 @@
       "SCADA"
     ],
     "thumbnailUrl": "/images/ccss.jpg",
-    "gallery": [],
+    "gallery": [
+      "/images/ccss2.jpg"
+    ],
     "summary": "Chemical Supply system. 약품 중앙 공급장치 모니터링 시스템 구축. SCADA Cimon.",
     "description": "## 문제점\n중앙 모니터 시스템. 추가 시 고가의 비용문제 해결. Cimon scada 로 변경.\n\n## 해결책\nCimon scada 로 변경. \n\n## 결과\n오류를 30% 비용 절감",
     "outcome": "",
     "status": "published",
     "order": 1,
     "createdAt": "2024-01-15T09:00:00.000Z",
-    "updatedAt": "2026-01-31T17:02:05.450Z"
+    "updatedAt": "2026-02-09T11:29:37.196Z"
   },
   {
     "id": "case-2",
@@ -63,26 +134,5 @@
     "order": 2,
     "createdAt": "2024-05-20T10:00:00.000Z",
     "updatedAt": "2026-02-01T10:16:08.746Z"
-  },
-  {
-    "clientName": "test",
-    "projectName": "test",
-    "period": "2023.08 - 2024.01",
-    "tags": [
-      "test"
-    ],
-    "thumbnailUrl": "/images/sat1.jpg",
-    "gallery": [
-      "/images/sat2.jpg",
-      "/images/sat2.jpg"
-    ],
-    "summary": "test",
-    "description": "test",
-    "outcome": "test",
-    "status": "published",
-    "order": 0,
-    "id": "2a837588-d6a8-43c4-9ce1-ebf3587532bf",
-    "createdAt": "2026-02-09T10:58:04.613Z",
-    "updatedAt": "2026-02-09T10:58:04.613Z"
   }
 ]
