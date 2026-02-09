@@ -55,7 +55,7 @@
       "keyence",
       "chemical flowmeter"
     ],
-    "thumbnailUrl": "/images/flowmeter1.jpg ",
+    "thumbnailUrl": "/images/flowmeter5.jpg ",
     "gallery": [
       "/images/flowmeter2.jpg",
       "/images/flowmeter3.jpg",
@@ -68,7 +68,7 @@
     "order": 0,
     "id": "045de487-4168-4d0b-9806-29240b701b56",
     "createdAt": "2026-02-09T11:59:22.700Z",
-    "updatedAt": "2026-02-09T12:19:13.495Z"
+    "updatedAt": "2026-02-09T12:30:49.126Z"
   },
   {
     "clientName": "Onsemi",
