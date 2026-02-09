@@ -8,10 +8,12 @@
       "ETCH",
       "SLIDING DOOR"
     ],
-    "thumbnailUrl": "/images/ccss.jpg",
+    "thumbnailUrl": "/images/door4.jpg",
     "gallery": [
-      "/images/sat2.jpg",
-      "/images/sat2.jpg"
+      "/images/door_before.jpg",
+      "/images/door1.jpg",
+      "/images/door2.jpg",
+      "/images/door3.jpg"
     ],
     "summary": "PARTICLE 관련하여 전면에 슬라이딩 도어를 추가 설치함.",
     "description": "Particle 관련 이슈로 인하여 전면 Sliding door 설치함. 일정시간 open시에 자동으로 sliding door close.",
@@ -19,7 +21,7 @@
     "status": "published",
     "order": 0,
     "createdAt": "2026-02-08T08:51:10.658Z",
-    "updatedAt": "2026-02-09T11:52:29.501Z"
+    "updatedAt": "2026-02-09T16:09:17.571Z"
   },
   {
     "clientName": "Onsemi",
@@ -125,12 +127,15 @@
     "tags": [
       "SAT",
       "LCSS",
-      "chemical"
+      "chemical",
+      "Local Supply"
     ],
     "thumbnailUrl": "/images/sat1.jpg",
     "gallery": [
       "/images/sat2.jpg",
-      "/images/sat3.jpg"
+      "/images/sat3.jpg",
+      "/images/sat4.jpg",
+      "/images/sat5.jpg"
     ],
     "summary": "Local 공급장치. 전장작업 및 Software Program",
     "description": "## 프로젝트 개요\nOnsemi SAT chemical Etching 장비에 Local 약품공급장치 납품\n\n## 주요 기능\n- 온도 Control\n- SC1 농도 Control 공급\n- Data Backup",
@@ -138,6 +143,6 @@
     "status": "published",
     "order": 2,
     "createdAt": "2024-05-20T10:00:00.000Z",
-    "updatedAt": "2026-02-01T10:16:08.746Z"
+    "updatedAt": "2026-02-09T16:03:06.612Z"
   }
 ]
