@@ -71,8 +71,17 @@
     padding-top: 32px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     color: #718096;
     font-size: 0.85rem;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.copyrightInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 .legal {

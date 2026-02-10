@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from './Footer.module.css';
+import VisitorCounter from './VisitorCounter';
 
 import { getExpertiseList } from '@/lib/expertise-db';
 
@@ -51,10 +52,15 @@ export default async function Footer() {
                 </div>
 
                 <div className={styles.bottomSection}>
-                    <p>&copy; {currentYear} JunSemi. All rights reserved.</p>
-                    <div className={styles.legal}>
-                        <Link href="/privacy">개인정보처리방침</Link>
-                        <Link href="/terms">이용약관</Link>
+                    <div className={styles.copyrightInfo}>
+                        <p>&copy; {currentYear} JunSemi. All rights reserved.</p>
+                        <div className={styles.legal}>
+                            <Link href="/privacy">개인정보처리방침</Link>
+                            <Link href="/terms">이용약관</Link>
+                        </div>
+                    </div>
+                    <div className={styles.visitorSection}>
+                        <VisitorCounter />
                     </div>
                 </div>
             </div>
