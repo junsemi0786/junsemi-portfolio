@@ -22,7 +22,7 @@
     "status": "published",
     "order": 0,
     "createdAt": "2026-02-08T08:51:10.658Z",
-    "updatedAt": "2026-02-10T12:24:01.640Z"
+    "updatedAt": "2026-02-10T12:27:15.610Z"
   },
   {
     "clientName": "Onsemi",
@@ -41,13 +41,13 @@
       "/images/sat7.jpg"
     ],
     "summary": "SAT 장비 Local chemical supply 장치 납품",
-    "description": "약품공급장치 납품....",
+    "description": "약품공급장치 납품......",
     "outcome": "LCSS 장치",
     "status": "published",
     "order": 0,
     "id": "2a837588-d6a8-43c4-9ce1-ebf3587532bf",
     "createdAt": "2026-02-09T10:58:04.613Z",
-    "updatedAt": "2026-02-10T12:10:55.300Z"
+    "updatedAt": "2026-02-10T12:27:21.841Z"
   },
   {
     "clientName": "Onsemi",

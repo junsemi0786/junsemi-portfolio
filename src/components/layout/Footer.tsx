@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from './Footer.module.css';
-import VisitorCounter from './VisitorCounter';
 
 import { getExpertiseList } from '@/lib/expertise-db';
 
@@ -60,7 +59,14 @@ export default async function Footer() {
                         </div>
                     </div>
                     <div className={styles.visitorSection}>
-                        <VisitorCounter />
+                        <div className={styles.hitsBadge}>
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                                src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fjunsemi.co.kr&count_bg=%234299E1&title_bg=%232D3748&icon=&icon_color=%23E7E7E7&title=Visitors&edge_flat=false"
+                                alt="Hits"
+                                style={{ height: '22px' }}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>

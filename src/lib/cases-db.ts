@@ -1,11 +1,8 @@
 import fs from 'fs/promises';
 import path from 'path';
-import { kv } from '@vercel/kv';
 import { CaseStudy, CaseStudyFormData } from '@/types/case-study';
 
 const DATA_FILE_PATH = path.join(process.cwd(), 'data', 'cases.json');
-const KV_KEY = 'cms:cases';
-const hasKVVars = process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN;
 
 // Ensure data directory exists (utility helper)
 async function ensureDataFile() {
@@ -18,50 +15,22 @@ async function ensureDataFile() {
 }
 
 export async function getCases(): Promise<CaseStudy[]> {
-    // 1. Redis에서 시도
-    if (hasKVVars) {
-        try {
-            const cachedCases = await kv.get<CaseStudy[]>(KV_KEY);
-            if (cachedCases) return cachedCases;
-        } catch (error) {
-            console.error('Failed to get cases from KV:', error);
-        }
-    }
-
-    // 2. Redis에 없거나 로컬이면 JSON 파일 시도
     await ensureDataFile();
     const fileContent = await fs.readFile(DATA_FILE_PATH, 'utf-8');
     try {
         const cases = JSON.parse(fileContent) as CaseStudy[];
+        // Normalize data to ensure type safety
         const normalized = cases.map(c => ({
             ...c,
             order: typeof c.order === 'number' ? c.order : 0,
             tags: Array.isArray(c.tags) ? c.tags : [],
             gallery: Array.isArray(c.gallery) ? c.gallery : [],
         }));
-        const sorted = normalized.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
-
-        // 마이그레이션: Redis 비어있으면 채우기
-        if (hasKVVars) {
-            await kv.set(KV_KEY, sorted);
-        }
-
-        return sorted;
+        // Sort by order with safe fallback
+        return normalized.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
     } catch (error) {
         console.error('Failed to parse cases.json', error);
         return [];
-    }
-}
-
-// 내부 헬퍼: Redis와 로컬 파일 동시 저장
-async function saveCases(cases: CaseStudy[]) {
-    if (hasKVVars) {
-        await kv.set(KV_KEY, cases);
-    }
-    try {
-        await fs.writeFile(DATA_FILE_PATH, JSON.stringify(cases, null, 2));
-    } catch {
-        // Vercel 환경 실패 무시
     }
 }
 
@@ -79,8 +48,11 @@ export async function createCase(data: CaseStudyFormData): Promise<CaseStudy> {
         updatedAt: new Date().toISOString(),
     };
 
+    // Add to beginning of list or end? Usually specific order matters.
+    // Add to end for now.
     cases.push(newCase);
-    await saveCases(cases);
+
+    await fs.writeFile(DATA_FILE_PATH, JSON.stringify(cases, null, 2));
     return newCase;
 }
 
@@ -96,7 +68,7 @@ export async function updateCase(id: string, data: Partial<CaseStudyFormData>): 
     };
     cases[index] = updatedCase;
 
-    await saveCases(cases);
+    await fs.writeFile(DATA_FILE_PATH, JSON.stringify(cases, null, 2));
     return updatedCase;
 }
 
@@ -107,7 +79,7 @@ export async function deleteCase(id: string): Promise<boolean> {
 
     if (cases.length === initialLength) return false;
 
-    await saveCases(cases);
+    await fs.writeFile(DATA_FILE_PATH, JSON.stringify(cases, null, 2));
     return true;
 }
 
@@ -132,5 +104,5 @@ export async function reorderCases(orderedIds: string[]): Promise<void> {
         }
     });
 
-    await saveCases(newCases);
+    await fs.writeFile(DATA_FILE_PATH, JSON.stringify(newCases, null, 2));
 }
