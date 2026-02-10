@@ -1,5 +1,7 @@
 import { kv } from '@vercel/kv';
 
+const hasKVVars = process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN;
+
 export interface VisitorStats {
     total: number;
     today: number;
@@ -21,6 +23,11 @@ const TOTAL_KEY = 'total_visitors';
 export async function getVisitorStats(): Promise<VisitorStats> {
     const todayKey = getTodayKey();
 
+    if (!hasKVVars) {
+        // Vercel KV 설정이 없는 경우 (로컬 개발 시) 조용히 0 반환
+        return { total: 0, today: 0 };
+    }
+
     try {
         // 다중 조회를 위해 mget 사용 가능하지만 간단히 개별 호출
         const [total, today] = await Promise.all([
@@ -41,6 +48,10 @@ export async function getVisitorStats(): Promise<VisitorStats> {
 
 export async function incrementVisitorStats(): Promise<VisitorStats> {
     const todayKey = getTodayKey();
+
+    if (!hasKVVars) {
+        return { total: 0, today: 0 };
+    }
 
     try {
         // 전체 카운트와 오늘 카운트 동시 증감

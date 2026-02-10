@@ -6,7 +6,8 @@
     "period": "2024.08 - 2024.09",
     "tags": [
       "ETCH",
-      "SLIDING DOOR"
+      "SLIDING DOOR",
+      "Particle issue"
     ],
     "thumbnailUrl": "/images/door5.jpg",
     "gallery": [
@@ -16,12 +17,12 @@
       "/images/door9.jpg"
     ],
     "summary": "PARTICLE 관련하여 전면에 슬라이딩 도어를 추가 설치함.",
-    "description": "Particle 관련 이슈로 인하여 전면 Sliding door 설치함. 일정시간 open시에 자동으로 sliding door close.",
+    "description": "Particle 관련 이슈로 인하여 전면 Sliding door 설치함. \nLoadlock open시 door open되어 외부 공기 유입으로 인하여 품질불량 발생 \n발판으로 opne/close 되며, 일정시간 open시에 자동으로 sliding door close됨.\nDoor는 Actuator 설치로 400mm open. 속도는 자동차 창문 정도의 4초 수준.",
     "outcome": "PARTICLE 개선",
     "status": "published",
     "order": 0,
     "createdAt": "2026-02-08T08:51:10.658Z",
-    "updatedAt": "2026-02-09T16:18:45.779Z"
+    "updatedAt": "2026-02-10T12:06:05.658Z"
   },
   {
     "clientName": "Onsemi",
