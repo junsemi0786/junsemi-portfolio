@@ -60,12 +60,14 @@ export default async function Footer() {
                     </div>
                     <div className={styles.visitorSection}>
                         <div className={styles.hitsBadge}>
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img
-                                src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fjunsemi.co.kr&count_bg=%234299E1&title_bg=%232D3748&icon=&icon_color=%23E7E7E7&title=Visitors&edge_flat=false"
-                                alt="Hits"
-                                style={{ height: '22px' }}
-                            />
+                            <a href="https://visitorbadge.io/status?path=https%3A%2F%2Fjunsemi.co.kr" target="_blank" rel="noopener noreferrer">
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                <img
+                                    src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fjunsemi.co.kr&label=VISITORS&labelColor=%232d3748&countColor=%234299e1&style=flat&labelStyle=upper"
+                                    alt="Visitors Counter"
+                                    style={{ height: '20px', display: 'block' }}
+                                />
+                            </a>
                         </div>
                     </div>
                 </div>
