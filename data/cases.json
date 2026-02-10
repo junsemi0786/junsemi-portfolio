@@ -22,7 +22,7 @@
     "status": "published",
     "order": 0,
     "createdAt": "2026-02-08T08:51:10.658Z",
-    "updatedAt": "2026-02-10T12:06:05.658Z"
+    "updatedAt": "2026-02-10T12:06:57.160Z"
   },
   {
     "clientName": "Onsemi",
@@ -41,13 +41,13 @@
       "/images/sat7.jpg"
     ],
     "summary": "SAT 장비 Local chemical supply 장치 납품",
-    "description": "약품공급장치 납품",
+    "description": "약품공급장치 납품....",
     "outcome": "LCSS 장치",
     "status": "published",
     "order": 0,
     "id": "2a837588-d6a8-43c4-9ce1-ebf3587532bf",
     "createdAt": "2026-02-09T10:58:04.613Z",
-    "updatedAt": "2026-02-09T12:28:40.041Z"
+    "updatedAt": "2026-02-10T12:10:55.300Z"
   },
   {
     "clientName": "Onsemi",
@@ -65,13 +65,13 @@
       "/images/ase4.jpg"
     ],
     "summary": "배관개조없이 flowemeter 개조개선, chemical, DIW, Air gas monitoring 및 interlock 추가로 품지불량 예방.",
-    "description": "이중인터락, chemical, DIW, Air gas monitoring 및 interlock 추가로 품지불량 예방.",
+    "description": "이중인터락, chemical, DIW, Air gas monitoring 및 interlock 추가로 품지불량 예방...",
     "outcome": "이중알람 설치. 품질불량",
     "status": "published",
     "order": 0,
     "id": "19af98d2-2a36-4688-8754-e2fa1d706ecb",
     "createdAt": "2026-02-09T12:10:08.919Z",
-    "updatedAt": "2026-02-09T12:12:11.865Z"
+    "updatedAt": "2026-02-10T12:13:11.378Z"
   },
   {
     "clientName": "Onsemi",
