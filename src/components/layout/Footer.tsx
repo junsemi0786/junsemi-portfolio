@@ -61,19 +61,21 @@ export default async function Footer() {
                     <div className={styles.visitorSection}>
                         <div className={styles.visitorBadges}>
                             {/* 당일 방문자 */}
-                            <div className={styles.badgeWrapper}>
+                            <div className={styles.badgeWrapper} style={{ marginRight: '8px' }}>
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img
-                                    src={`https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fjunsemi.co.kr-today-${new Date().toISOString().split('T')[0]}&label=TODAY&labelColor=%230a2e4c&countColor=%230a2e4c&style=flat-square`}
+                                    src={`https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fjunsemi.co.kr-today-${new Date().toISOString().split('T')[0]}&label=TODAY&labelColor=003366&countColor=003366&style=flat-square&t=${Date.now()}`}
                                     alt="Today Visitors"
-                                    style={{ height: '22px' }}
+                                    style={{ height: '22px', display: 'block' }}
                                 />
                             </div>
                             {/* 누적 방문자 */}
                             <div className={styles.badgeWrapper}>
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img
-                                    src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fjunsemi.co.kr&label=TOTAL&labelColor=%230a2e4c&countColor=%230a2e4c&style=flat-square"
+                                    src={`https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fjunsemi.co.kr&label=TOTAL&labelColor=003366&countColor=003366&style=flat-square&t=${Date.now()}`}
                                     alt="Total Visitors"
-                                    style={{ height: '22px' }}
+                                    style={{ height: '22px', display: 'block' }}
                                 />
                             </div>
                         </div>
