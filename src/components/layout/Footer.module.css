@@ -104,14 +104,19 @@
     align-items: center;
 }
 
-.hitsBadge {
+.visitorBadges {
     display: flex;
+    gap: 8px;
     align-items: center;
+}
+
+.badgeWrapper {
+    opacity: 0.9;
     transition: opacity 0.2s;
 }
 
-.hitsBadge:hover {
-    opacity: 0.8;
+.badgeWrapper:hover {
+    opacity: 1;
 }
 
 @media (max-width: 768px) {
