@@ -59,15 +59,23 @@ export default async function Footer() {
                         </div>
                     </div>
                     <div className={styles.visitorSection}>
-                        <div className={styles.hitsBadge}>
-                            <a href="https://visitorbadge.io/status?path=https%3A%2F%2Fjunsemi.co.kr" target="_blank" rel="noopener noreferrer">
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <div className={styles.visitorBadges}>
+                            {/* 당일 방문자 */}
+                            <div className={styles.badgeWrapper}>
                                 <img
-                                    src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fjunsemi.co.kr&label=VISITORS&labelColor=%232d3748&countColor=%234299e1&style=flat&labelStyle=upper"
-                                    alt="Visitors Counter"
-                                    style={{ height: '20px', display: 'block' }}
+                                    src={`https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fjunsemi.co.kr-today-${new Date().toISOString().split('T')[0]}&label=TODAY&labelColor=%230a2e4c&countColor=%230a2e4c&style=flat-square`}
+                                    alt="Today Visitors"
+                                    style={{ height: '22px' }}
                                 />
-                            </a>
+                            </div>
+                            {/* 누적 방문자 */}
+                            <div className={styles.badgeWrapper}>
+                                <img
+                                    src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fjunsemi.co.kr&label=TOTAL&labelColor=%230a2e4c&countColor=%230a2e4c&style=flat-square"
+                                    alt="Total Visitors"
+                                    style={{ height: '22px' }}
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
