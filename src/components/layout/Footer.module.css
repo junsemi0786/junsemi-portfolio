@@ -72,7 +72,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: #718096;
+    color: #cbd5e0;
+    /* 더 밝은 색으로 변경하여 시인성 개선 */
     font-size: 0.85rem;
     flex-wrap: wrap;
     gap: 20px;
@@ -87,6 +88,11 @@
 .legal {
     display: flex;
     gap: 20px;
+}
+
+.legal a {
+    color: #cbd5e0;
+    transition: color 0.2s;
 }
 
 .legal a:hover {
