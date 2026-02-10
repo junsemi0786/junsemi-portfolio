@@ -105,10 +105,13 @@
 }
 
 .hitsBadge {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 4px;
-    border-radius: 6px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    transition: opacity 0.2s;
+}
+
+.hitsBadge:hover {
+    opacity: 0.8;
 }
 
 @media (max-width: 768px) {
