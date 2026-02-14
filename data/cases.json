@@ -5,9 +5,9 @@
     "projectName": "장비 전면 슬라이딩도어 설치",
     "period": "2024.08 - 2024.09",
     "tags": [
-      "ETCH",
       "SLIDING DOOR",
-      "Particle issue"
+      "Particle issue",
+      "Diff"
     ],
     "thumbnailUrl": "/images/door5.jpg",
     "gallery": [
@@ -16,13 +16,13 @@
       "/images/door8.jpg",
       "/images/door9.jpg"
     ],
-    "summary": "PARTICLE 관련하여 전면에 슬라이딩 도어를 추가 설치함.",
-    "description": "Particle 관련 이슈로 인하여 전면 Sliding door 설치함. \nLoadlock open시 door open되어 외부 공기 유입으로 인하여 품질불량 발생 \n발판으로 opne/close 되며, 일정시간 open시에 자동으로 sliding door close됨.\nDoor는 Actuator 설치로 400mm open. 속도는 자동차 창문 정도의 4초 수준으로 동작됨",
+    "summary": "장비 Gate와 연동한 Sliding Door Modify.",
+    "description": "장비 Gate와 연동한 전면 Sliding door 설치함. \nLoadlock(Gate) open시 Door Open으로 인하여 외부 공기 유입으로 인하여 품질불량 발생 \n양쪽 발판으로 opne/close 되며, 일정시간 open시에 자동으로 sliding door close됨.\nDoor는 Actuator 설치로 400mm open. 속도는 자동차 창문 정도의 4초 수준으로 동작됨.\nLoadlock open되었을 시엔 door open불가. \nSliding Door close동작중 Area sensor감지 시 open됨.",
     "outcome": "PARTICLE 개선",
     "status": "published",
     "order": 0,
     "createdAt": "2026-02-08T08:51:10.658Z",
-    "updatedAt": "2026-02-10T13:34:31.649Z"
+    "updatedAt": "2026-02-14T08:58:21.379Z"
   },
   {
     "clientName": "Onsemi",
@@ -41,13 +41,13 @@
       "/images/sat7.jpg"
     ],
     "summary": "SAT 장비 Local chemical supply 장치 납품",
-    "description": "약품공급장치 납품......",
-    "outcome": "LCSS 장치",
+    "description": "## 프로젝트 개요\nOnsemi SAT chemical Etching 장비에 Local 약품공급장치 납품\nLocal 공급장치. 전장작업 및 Software Program\n\n## 주요 기능\n- 온도 Control\n- SC1 농도 Control 공급\n- Data Backup\n\nTank1 Chemical#1 \n온도 Control, Supply \nTank2 Chemical#2\nNH4OH, H2O2, DIW. HORIBA 농도계. SC1 농도 Control Sub 공급. 온도 Control, SAT 연동.",
+    "outcome": "LCSS 장치.  Blending Chemical Supply system. HORIBA 농도계",
     "status": "published",
     "order": 0,
     "id": "2a837588-d6a8-43c4-9ce1-ebf3587532bf",
     "createdAt": "2026-02-09T10:58:04.613Z",
-    "updatedAt": "2026-02-10T12:27:21.841Z"
+    "updatedAt": "2026-02-14T09:10:34.604Z"
   },
   {
     "clientName": "Onsemi",
@@ -56,7 +56,9 @@
     "tags": [
       "개조개선",
       "flowmeter",
-      "keyence"
+      "keyence",
+      "ASE",
+      "Al spind etcher"
     ],
     "thumbnailUrl": "/images/ase5.jpg",
     "gallery": [
@@ -64,14 +66,14 @@
       "/images/ase3.jpg",
       "/images/ase4.jpg"
     ],
-    "summary": "배관개조없이 flowemeter 개조개선, chemical, DIW, Air gas monitoring 및 interlock 추가로 품지불량 예방.",
-    "description": "이중인터락, chemical, DIW, Air gas monitoring 및 interlock 추가로 품지불량 예방...",
+    "summary": "배관개조없이 flowemeter 개조개선, chemical, DIW, Air gas monitoring 및 interlock 추가로 품질불량 예방.",
+    "description": "이중인터락, chemical, DIW, Air gas monitoring\nPLC Program 연동. Touch Parameter interlock Setting\nAlarm 추가. 품질불량 예방",
     "outcome": "이중알람 설치. 품질불량",
     "status": "published",
     "order": 0,
     "id": "19af98d2-2a36-4688-8754-e2fa1d706ecb",
     "createdAt": "2026-02-09T12:10:08.919Z",
-    "updatedAt": "2026-02-10T12:13:11.378Z"
+    "updatedAt": "2026-02-14T09:07:14.972Z"
   },
   {
     "clientName": "Onsemi",
@@ -90,13 +92,13 @@
       "/images/flowmeter4.jpg"
     ],
     "summary": "순환 라인에 flowmeter 설비 인터락 추가로 품질불량예방.",
-    "description": "배관 작업없이 keyence flowmeter 적용하여 순환 Line flow 알람 설정하여 풀질 불량 예방.",
+    "description": "Chemical Bath의 항온조(Heat exchanger)의 순환 배관의 변경 작업없이 설치 했으며, Sensor 접점 신호나 아날로그 신호를 PLC 입력부에 연결하여 알람 설정. Keyence flowmeter 적용. 순환 Line flow 알람 설정하여 풀질 불량 예방.",
     "outcome": "",
     "status": "published",
     "order": 0,
     "id": "8bb24c20-6472-4f93-9b0d-21562de48ea0",
     "createdAt": "2026-02-09T15:53:38.378Z",
-    "updatedAt": "2026-02-09T15:54:18.299Z"
+    "updatedAt": "2026-02-14T05:12:37.884Z"
   },
   {
     "id": "case-1",
@@ -119,31 +121,5 @@
     "order": 1,
     "createdAt": "2024-01-15T09:00:00.000Z",
     "updatedAt": "2026-02-09T11:29:37.196Z"
-  },
-  {
-    "id": "case-2",
-    "clientName": "Onsemi",
-    "projectName": "Local Chemical Supply System For SAT",
-    "period": "2024.09 - 2024.12",
-    "tags": [
-      "SAT",
-      "LCSS",
-      "chemical",
-      "Local Supply"
-    ],
-    "thumbnailUrl": "/images/sat1.jpg",
-    "gallery": [
-      "/images/sat2.jpg",
-      "/images/sat3.jpg",
-      "/images/sat4.jpg",
-      "/images/sat5.jpg"
-    ],
-    "summary": "Local 공급장치. 전장작업 및 Software Program",
-    "description": "## 프로젝트 개요\nOnsemi SAT chemical Etching 장비에 Local 약품공급장치 납품\n\n## 주요 기능\n- 온도 Control\n- SC1 농도 Control 공급\n- Data Backup",
-    "outcome": "",
-    "status": "published",
-    "order": 2,
-    "createdAt": "2024-05-20T10:00:00.000Z",
-    "updatedAt": "2026-02-09T16:03:06.612Z"
   }
 ]
