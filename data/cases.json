@@ -101,6 +101,74 @@
     "updatedAt": "2026-02-14T05:12:37.884Z"
   },
   {
+    "clientName": "ONSEMI",
+    "projectName": "Mercury Refurbish & Set-up. Install",
+    "period": "2024.01",
+    "tags": [],
+    "thumbnailUrl": "/images/mercury/m4.jpg",
+    "gallery": [
+      "/images/mercury/m4.jpg"
+    ],
+    "summary": "/images/project-1.jpg",
+    "description": "/images/project-1.jpg",
+    "outcome": "",
+    "status": "draft",
+    "order": 0,
+    "id": "66507b67-7a02-449b-abd4-5bca62f45edd",
+    "createdAt": "2026-02-14T10:10:41.315Z",
+    "updatedAt": "2026-02-14T12:43:28.294Z"
+  },
+  {
+    "clientName": "부천까치울정수장",
+    "projectName": "정수장 SCADA & PLC 자동제어 유지보수",
+    "period": "2025.01",
+    "tags": [
+      "싸이몬",
+      "스카다",
+      "CIMON",
+      "SCADA",
+      "정수장",
+      "장",
+      "HMI"
+    ],
+    "thumbnailUrl": "/images/정수장/jung1.jpg",
+    "gallery": [
+      "/images/정수장/jung2.jpg",
+      "/images/정수장/jung3.jpg",
+      "/images/정수장/jung4.jpg"
+    ],
+    "summary": "정수장 Cimon Scada HMI & PLC 유지보수",
+    "description": "부천까치울정수장 중앙제어 싸이몬 스카다 & PLC 유지보수 관리.",
+    "outcome": "",
+    "status": "published",
+    "order": 0,
+    "id": "bebac52c-ca71-4a73-9161-27c624538085",
+    "createdAt": "2026-02-14T10:11:50.933Z",
+    "updatedAt": "2026-02-14T15:10:17.726Z"
+  },
+  {
+    "clientName": "ONSEMI",
+    "projectName": "TUBE DRYER 전장",
+    "period": "2024.01",
+    "tags": [
+      "Tube Dryer",
+      "전장"
+    ],
+    "thumbnailUrl": "/images/tube/t3.jpg",
+    "gallery": [
+      "/images/tube/t1.jpg",
+      "/images/tube/t2.jpg"
+    ],
+    "summary": "디퓨전 튜브(Diffusion Tube) 드라이어",
+    "description": "디퓨전 튜브(Diffusion Tube) 드라이어 전장작업",
+    "outcome": "",
+    "status": "published",
+    "order": 0,
+    "id": "136dbd36-8da9-4265-b331-1fe00a3de31d",
+    "createdAt": "2026-02-14T10:12:35.979Z",
+    "updatedAt": "2026-02-14T15:15:14.335Z"
+  },
+  {
     "id": "case-1",
     "clientName": "원이엔지",
     "projectName": "Chemical Center Supply system Monitoring SCADA",
