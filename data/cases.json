@@ -7,14 +7,20 @@
     "tags": [
       "SLIDING DOOR",
       "Particle issue",
-      "Diff"
+      "Diff",
+      "ETCH"
     ],
     "thumbnailUrl": "/images/door5.jpg",
     "gallery": [
       "/images/door6.jpg",
       "/images/door7.jpg",
       "/images/door8.jpg",
-      "/images/door9.jpg"
+      "/images/door9.jpg",
+      "/images/sliding1/sl1.jpg",
+      "/images/sliding1/sl1.jpg",
+      "/images/sliding1/sl2.jpg",
+      "/images/sliding1/sl3.jpg",
+      "/images/sliding1/sl4.jpg"
     ],
     "summary": "장비 Gate와 연동한 Sliding Door Modify.",
     "description": "장비 Gate와 연동한 전면 Sliding door 설치함. \nLoadlock(Gate) open시 Door Open으로 인하여 외부 공기 유입으로 인하여 품질불량 발생 \n양쪽 발판으로 opne/close 되며, 일정시간 open시에 자동으로 sliding door close됨.\nDoor는 Actuator 설치로 400mm open. 속도는 자동차 창문 정도의 4초 수준으로 동작됨.\nLoadlock open되었을 시엔 door open불가. \nSliding Door close동작중 Area sensor감지 시 open됨.",
@@ -22,7 +28,7 @@
     "status": "published",
     "order": 0,
     "createdAt": "2026-02-08T08:51:10.658Z",
-    "updatedAt": "2026-02-14T08:58:21.379Z"
+    "updatedAt": "2026-02-14T15:18:35.970Z"
   },
   {
     "clientName": "Onsemi",
