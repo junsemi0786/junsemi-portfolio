@@ -17,7 +17,6 @@
       "/images/door8.jpg",
       "/images/door9.jpg",
       "/images/sliding1/sl1.jpg",
-      "/images/sliding1/sl1.jpg",
       "/images/sliding1/sl2.jpg",
       "/images/sliding1/sl3.jpg",
       "/images/sliding1/sl4.jpg"
@@ -28,7 +27,7 @@
     "status": "published",
     "order": 0,
     "createdAt": "2026-02-08T08:51:10.658Z",
-    "updatedAt": "2026-02-14T15:18:35.970Z"
+    "updatedAt": "2026-02-14T15:20:39.806Z"
   },
   {
     "clientName": "Onsemi",
