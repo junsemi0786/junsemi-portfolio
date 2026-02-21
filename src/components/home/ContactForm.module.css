@@ -30,7 +30,8 @@
 .field label {
     font-size: 0.9rem;
     font-weight: 600;
-    color: var(--color-text-main);
+    color: #1e293b;
+    /* 흰 배경 위에서 잘 보이는 진한 슬레이트 색상 */
 }
 
 .required {
@@ -79,12 +80,12 @@
     border-radius: 4px;
     font-size: 0.85rem;
     font-weight: 600;
-    color: var(--color-text-secondary);
+    color: #475569;
 }
 
 .fileLabel {
     font-size: 0.85rem;
-    color: var(--color-text-secondary);
+    color: #475569;
 }
 
 .submitWrapper {

@@ -25,7 +25,7 @@ export default async function Footer() {
                         <address className={styles.address}>
                             <p>경기도 부천시 장말로 282-14</p>
                             <p>Email: hello@junsemi.co.kr</p>
-                            <p>Tel: 010-665-0786 | Fax: 0504-445-0786</p>
+                            <p>Tel: 010-6659-0786 | Fax: 0504-445-0786</p>
                         </address>
                     </div>
 

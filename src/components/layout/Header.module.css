@@ -78,3 +78,43 @@
         font-size: 0.9rem;
     }
 }
+
+/* ─── Language Toggle Button ─────────────────────── */
+.langToggle {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 5px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(8px);
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    transition: background 0.2s, border-color 0.2s, transform 0.1s;
+}
+
+.langToggle:hover {
+    background: rgba(255, 255, 255, 0.16);
+    border-color: var(--color-accent);
+    transform: scale(1.04);
+}
+
+.langToggle:active {
+    transform: scale(0.97);
+}
+
+.langActive {
+    color: var(--color-accent);
+}
+
+.langInactive {
+    color: var(--color-text-muted, #888);
+}
+
+.langDivider {
+    color: rgba(255, 255, 255, 0.2);
+    margin: 0 1px;
+}

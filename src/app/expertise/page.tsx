@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
+import ExpertisePageContent from '@/components/features/ExpertisePageContent';
 import SolutionCard from '@/components/features/SolutionCard';
-import styles from './page.module.css';
 import { getExpertiseList } from '@/lib/expertise-db';
 
 export const metadata: Metadata = {
@@ -40,25 +40,15 @@ export default async function ExpertisePage() {
     };
 
     return (
-        <div className={styles.container}>
-            <header className={styles.header}>
-                <h1 className={styles.pageTitle}>기술 역량 (Expertise)</h1>
-                <p className={styles.pageSubtitle}>
-                    반도체 장비부터 제어 시스템까지,<br />
-                    JunSemi만의 차별화된 기술력을 소개합니다.
-                </p>
-            </header>
-
-            <div className={styles.grid}>
-                {expertises.map((item) => (
-                    <SolutionCard
-                        key={item.id}
-                        {...item}
-                        title={item.title.replace('\\n', '\n')} // Handle newline escape
-                        iconCode={getIcon(item.iconType)}
-                    />
-                ))}
-            </div>
-        </div>
+        <ExpertisePageContent>
+            {expertises.map((item) => (
+                <SolutionCard
+                    key={item.id}
+                    {...item}
+                    title={item.title.replace('\\n', '\n')}
+                    iconCode={getIcon(item.iconType)}
+                />
+            ))}
+        </ExpertisePageContent>
     );
 }

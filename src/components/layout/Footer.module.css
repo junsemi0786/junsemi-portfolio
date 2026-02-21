@@ -28,7 +28,7 @@
 
 .address {
     font-style: normal;
-    color: #a0aec0;
+    color: #e2e8f0;
     line-height: 1.8;
     font-size: 0.9rem;
 }
@@ -58,7 +58,7 @@
 }
 
 .column ul li a {
-    color: #a0aec0;
+    color: #e2e8f0;
     transition: color 0.2s;
 }
 
@@ -72,8 +72,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: #cbd5e0;
-    /* 더 밝은 색으로 변경하여 시인성 개선 */
+    color: #f1f5f9;
     font-size: 0.85rem;
     flex-wrap: wrap;
     gap: 20px;
@@ -91,7 +90,7 @@
 }
 
 .legal a {
-    color: #cbd5e0;
+    color: #f1f5f9;
     transition: color 0.2s;
 }
 
