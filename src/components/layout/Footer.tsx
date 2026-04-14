@@ -3,10 +3,12 @@ import Image from 'next/image';
 import styles from './Footer.module.css';
 
 import { getExpertiseList } from '@/lib/expertise-db';
+import { getContactInfo } from '@/lib/contact-db';
 
 export default async function Footer() {
     const currentYear = new Date().getFullYear();
     const expertises = await getExpertiseList();
+    const contactInfo = await getContactInfo();
 
     return (
         <footer className={styles.footer}>
@@ -23,9 +25,9 @@ export default async function Footer() {
                             />
                         </div>
                         <address className={styles.address}>
-                            <p>경기도 부천시 장말로 282-14</p>
-                            <p>Email: hello@junsemi.co.kr</p>
-                            <p>Tel: 010-6659-0786 | Fax: 0504-445-0786</p>
+                            <p>{contactInfo.address || '경기도 부천시 장말로 282-14'}</p>
+                            <p>Email: {contactInfo.email || 'hello@junsemi.co.kr'}</p>
+                            <p>Tel: {contactInfo.phone || '010-6659-0786'} | Fax: {contactInfo.fax || '0504-445-0786'}</p>
                         </address>
                     </div>
 

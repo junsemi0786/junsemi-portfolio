@@ -8,6 +8,7 @@ export async function updateContactInfoAction(data: ContactInfo) {
         await updateContactInfo(data);
         revalidatePath('/contact');
         revalidatePath('/admin/contact');
+        revalidatePath('/');
         return { success: true };
     } catch (e: any) {
         console.error('Update contact info error:', e);

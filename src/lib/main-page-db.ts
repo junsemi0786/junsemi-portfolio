@@ -1,4 +1,4 @@
-import { createClient } from 'redis';
+import Redis from 'ioredis';
 import fs from 'fs/promises';
 import path from 'path';
 
@@ -47,7 +47,7 @@ const defaultData: MainPageData = {
 };
 
 let globalWithRedis = global as typeof globalThis & {
-  _redisClientMain?: ReturnType<typeof createClient>;
+  _redisClientMain?: Redis;
 };
 
 async function getRedisClient() {
@@ -56,9 +56,8 @@ async function getRedisClient() {
     }
 
     if (!globalWithRedis._redisClientMain) {
-        const client = createClient({ url: process.env.REDIS_URL });
+        const client = new Redis(process.env.REDIS_URL);
         client.on('error', (err) => console.error('Redis Client Error', err));
-        await client.connect();
         globalWithRedis._redisClientMain = client;
     }
     

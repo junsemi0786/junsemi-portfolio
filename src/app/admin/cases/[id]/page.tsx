@@ -12,10 +12,9 @@ export default async function EditCasePage(props: { params: Promise<{ id: string
         notFound();
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleUpdate = async (data: any) => {
         'use server';
-        await updateCaseAction(params.id, data);
+        return await updateCaseAction(params.id, data);
     };
 
     const handleDelete = async () => {

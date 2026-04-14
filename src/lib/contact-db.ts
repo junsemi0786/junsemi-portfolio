@@ -1,4 +1,4 @@
-import { createClient } from 'redis';
+import Redis from 'ioredis';
 import fs from 'fs/promises';
 import path from 'path';
 
@@ -14,7 +14,7 @@ export interface ContactInfo {
 }
 
 let globalWithRedis = global as typeof globalThis & {
-  _redisClientContact?: ReturnType<typeof createClient>;
+  _redisClientContact?: Redis;
 };
 
 async function getRedisClient() {
@@ -23,9 +23,8 @@ async function getRedisClient() {
     }
 
     if (!globalWithRedis._redisClientContact) {
-        const client = createClient({ url: process.env.REDIS_URL });
+        const client = new Redis(process.env.REDIS_URL);
         client.on('error', (err) => console.error('Redis Client Error', err));
-        await client.connect();
         globalWithRedis._redisClientContact = client;
     }
     

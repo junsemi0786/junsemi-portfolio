@@ -13,6 +13,7 @@ export async function createExpertiseAction(data: ExpertiseFormData) {
     }
     revalidatePath('/expertise');
     revalidatePath('/admin/expertise');
+    revalidatePath('/');
     redirect('/admin/expertise');
 }
 
@@ -24,6 +25,7 @@ export async function updateExpertiseAction(id: string, data: Partial<ExpertiseF
     }
     revalidatePath('/expertise');
     revalidatePath('/admin/expertise');
+    revalidatePath('/');
     redirect('/admin/expertise');
 }
 
@@ -35,5 +37,6 @@ export async function deleteExpertiseAction(id: string) {
     }
     revalidatePath('/expertise');
     revalidatePath('/admin/expertise');
+    revalidatePath('/');
     redirect('/admin/expertise');
 }

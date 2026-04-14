@@ -1,4 +1,4 @@
-import { createClient } from 'redis';
+import Redis from 'ioredis';
 import fs from 'fs/promises';
 import path from 'path';
 import { TechnicalExpertise, ExpertiseFormData } from '@/types/expertise';
@@ -7,7 +7,7 @@ const DATA_FILE_PATH = path.join(process.cwd(), 'data', 'expertise.json');
 
 // 전역 클라이언트 캐싱 (핫 리로드 시 다중 연결 방지)
 let globalWithRedis = global as typeof globalThis & {
-  _redisClient?: ReturnType<typeof createClient>;
+  _redisClientExportise?: Redis;
 };
 
 async function getRedisClient() {
@@ -15,14 +15,13 @@ async function getRedisClient() {
         throw new Error('REDIS_URL 환경 변수가 누락되었습니다. Vercel 환경 변수에 REDIS_URL을 등록해주세요.');
     }
 
-    if (!globalWithRedis._redisClient) {
-        const client = createClient({ url: process.env.REDIS_URL });
+    if (!globalWithRedis._redisClientExportise) {
+        const client = new Redis(process.env.REDIS_URL);
         client.on('error', (err) => console.error('Redis Client Error', err));
-        await client.connect();
-        globalWithRedis._redisClient = client;
+        globalWithRedis._redisClientExportise = client;
     }
     
-    return globalWithRedis._redisClient;
+    return globalWithRedis._redisClientExportise;
 }
 
 export async function getExpertiseList(): Promise<TechnicalExpertise[]> {

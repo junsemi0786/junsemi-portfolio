@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { TechnicalExpertise, ExpertiseFormData } from '@/types/expertise';
 import Button from '@/components/ui/Button';
+import toast from 'react-hot-toast';
 
 interface ExpertiseFormProps {
     initialData?: TechnicalExpertise;
@@ -64,27 +65,33 @@ export default function ExpertiseForm({ initialData, onSubmit, isEditing = false
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!formData.id.trim()) {
-            alert('ID is required');
+            toast.error('ID is required');
             return;
         }
         setLoading(true);
+
+        const toastId = toast.loading('저장 중...');
+
         try {
             const res = await onSubmit(formData);
             if (res && res.error) {
-                alert(res.error);
+                toast.error(res.error, { id: toastId });
                 setLoading(false);
                 return;
             }
+            toast.success(isEditing ? '수정 완료되었습니다.' : '등록 완료되었습니다.', { id: toastId });
         } catch (error) {
             // Next.js redirect는 에러 객체를 통해 작동하므로,
             // NEXT_REDIRECT 에러인 경우 다시 throw하여 리다이렉트가 실행되도록 함
             if (error instanceof Error && (error.message === 'NEXT_REDIRECT' || error.message.includes('redirect'))) {
+                toast.dismiss(toastId);
                 throw error;
             } else if (error && typeof error === 'object' && 'message' in error && typeof error.message === 'string' && (error.message === 'NEXT_REDIRECT' || error.message.includes('redirect'))) {
+                toast.dismiss(toastId);
                 throw error;
             }
             console.error(error);
-            alert('저장 실패했습니다.');
+            toast.error('저장에 실패했습니다.', { id: toastId });
             setLoading(false);
         }
     };

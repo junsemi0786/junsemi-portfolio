@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { CaseStudy, CaseStudyFormData } from '@/types/case-study';
 import Button from '@/components/ui/Button';
+import toast from 'react-hot-toast';
 
 interface CaseFormProps {
     initialData?: CaseStudy;
@@ -56,21 +57,26 @@ export default function CaseForm({ initialData, onSubmit, isEditing = false }: C
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
+
+        const toastId = toast.loading('저장 중...');
+
         try {
             const res = await onSubmit(formData);
             if (res && res.error) {
-                alert(res.error);
+                toast.error(res.error, { id: toastId });
                 setLoading(false);
                 return; // Return early so loading is stopped and form state is preserved
             }
+            toast.success(isEditing ? '수정 완료되었습니다.' : '주요 실적이 등록되었습니다.', { id: toastId });
         } catch (error) {
             // Next.js redirect는 에러 객체를 통해 작동하므로, 
             // 메시지가 없거나 리다이렉트 관련 에러면 다시 throw하여 작동시킴
             if (error instanceof Error && (error.message === 'NEXT_REDIRECT' || error.message.includes('redirect'))) {
+                toast.dismiss(toastId);
                 throw error;
             }
             console.error(error);
-            alert('Failed to save case study');
+            toast.error('저장에 실패했습니다.', { id: toastId });
             setLoading(false);
         } 
     };

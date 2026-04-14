@@ -3,6 +3,7 @@ import { Noto_Sans_KR } from "next/font/google";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { LanguageProvider } from "@/contexts/LanguageContext";
+import ToastProvider from "@/components/providers/ToastProvider";
 import "./globals.css";
 
 const notoSansKr = Noto_Sans_KR({
@@ -25,6 +26,7 @@ export default function RootLayout({
     <html lang="ko">
       <body className={notoSansKr.className}>
         <LanguageProvider>
+          <ToastProvider />
           <Header />
           <main style={{ minHeight: 'calc(100vh - var(--header-height))', paddingTop: 'var(--header-height)' }}>
             {children}

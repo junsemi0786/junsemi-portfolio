@@ -1,4 +1,4 @@
-import { createClient } from 'redis';
+import Redis from 'ioredis';
 import fs from 'fs/promises';
 import path from 'path';
 import { CaseStudy, CaseStudyFormData } from '@/types/case-study';
@@ -6,7 +6,7 @@ import { CaseStudy, CaseStudyFormData } from '@/types/case-study';
 const DATA_FILE_PATH = path.join(process.cwd(), 'data', 'cases.json');
 
 let globalWithRedis = global as typeof globalThis & {
-  _redisClientCases?: ReturnType<typeof createClient>;
+  _redisClientCases?: Redis;
 };
 
 async function getRedisClient() {
@@ -15,9 +15,8 @@ async function getRedisClient() {
     }
 
     if (!globalWithRedis._redisClientCases) {
-        const client = createClient({ url: process.env.REDIS_URL });
+        const client = new Redis(process.env.REDIS_URL);
         client.on('error', (err) => console.error('Redis Client Error', err));
-        await client.connect();
         globalWithRedis._redisClientCases = client;
     }
     

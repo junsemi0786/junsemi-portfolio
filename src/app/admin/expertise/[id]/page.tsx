@@ -11,10 +11,9 @@ export default async function EditExpertisePage(props: { params: Promise<{ id: s
         notFound();
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleUpdate = async (data: any) => {
         'use server';
-        await updateExpertiseAction(params.id, data);
+        return await updateExpertiseAction(params.id, data);
     };
 
     const handleDelete = async () => {

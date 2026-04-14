@@ -51,6 +51,17 @@ export default function AdminDashboard() {
                             메인 관리 바로가기
                         </Button>
                     </div>
+
+                    {/* Settings Management Card */}
+                    <div className="glass-panel" style={{ padding: '2rem', textAlign: 'center' }}>
+                        <h2 style={{ marginBottom: '1rem' }}>계정 및 시스템 설정</h2>
+                        <p style={{ marginBottom: '2rem', color: '#888' }}>
+                            관리자 비밀번호를 안전하게 수정하세요.
+                        </p>
+                        <Button href="/admin/settings" fullWidth>
+                            설정 바로가기
+                        </Button>
+                    </div>
                 </div>
             </div>
         </main>

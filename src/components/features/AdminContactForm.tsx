@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Button from '@/components/ui/Button';
+import toast from 'react-hot-toast';
 
 interface ContactInfo {
     phone: string;
@@ -29,22 +30,26 @@ export default function AdminContactForm({ initialData, onSubmit }: AdminContact
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
+
+        const toastId = toast.loading('저장 중...');
+
         try {
             const res = await onSubmit(formData);
             if (res && res.error) {
-                alert(res.error);
+                toast.error(res.error, { id: toastId });
                 return;
             }
-            alert('정보가 수정되었습니다.');
+            toast.success('정보가 수정되었습니다.', { id: toastId });
         } catch (error) {
-            // Next.js redirect는 에러 객체를 통해 작동하므로,
             if (error instanceof Error && (error.message === 'NEXT_REDIRECT' || error.message.includes('redirect'))) {
+                toast.dismiss(toastId);
                 throw error;
             } else if (error && typeof error === 'object' && 'message' in error && typeof (error as any).message === 'string' && ((error as any).message === 'NEXT_REDIRECT' || (error as any).message.includes('redirect'))) {
+                toast.dismiss(toastId);
                 throw error;
             }
             console.error(error);
-            alert('저장 실패했습니다.');
+            toast.error('저장에 실패했습니다.', { id: toastId });
         } finally {
             setLoading(false);
         }

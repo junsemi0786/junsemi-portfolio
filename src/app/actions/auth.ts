@@ -2,11 +2,15 @@
 
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
+import { getAdminPassword } from '@/lib/admin-config-db';
 
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '0901'; // Default password for demo
+const FALLBACK_ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '0901'; // Default password for demo
 
 export async function loginAction(password: string) {
-    if (password === ADMIN_PASSWORD) {
+    const dbPassword = await getAdminPassword();
+    const validPassword = dbPassword || FALLBACK_ADMIN_PASSWORD;
+
+    if (password === validPassword) {
         (await cookies()).set('admin_session', 'true', {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',

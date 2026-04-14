@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { MainPageData } from '@/lib/main-page-db';
 import Button from '@/components/ui/Button';
+import toast from 'react-hot-toast';
 
 interface AdminMainPageFormProps {
     initialData: MainPageData;
@@ -12,7 +13,6 @@ interface AdminMainPageFormProps {
 export default function AdminMainPageForm({ initialData, onSubmit }: AdminMainPageFormProps) {
     const [formData, setFormData] = useState<MainPageData>(initialData);
     const [loading, setLoading] = useState(false);
-    const [message, setMessage] = useState('');
 
     const handleChange = (section: keyof MainPageData, field: string, value: string) => {
         setFormData((prev) => ({
@@ -27,20 +27,22 @@ export default function AdminMainPageForm({ initialData, onSubmit }: AdminMainPa
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
-        setMessage('');
+
+        const toastId = toast.loading('저장 중...');
 
         try {
             const res = await onSubmit(formData);
             if (res && res.error) {
-                setMessage(res.error);
+                toast.error(res.error, { id: toastId });
                 return;
             }
-            setMessage('메인 페이지 정보가 성공적으로 업데이트되었습니다.');
+            toast.success('메인 페이지 정보가 업데이트되었습니다.', { id: toastId });
         } catch (error) {
             if (error instanceof Error && (error.message === 'NEXT_REDIRECT' || error.message.includes('redirect'))) {
+                toast.dismiss(toastId);
                 throw error;
             }
-            setMessage('업데이트 중 오류가 발생했습니다.');
+            toast.error('업데이트 중 오류가 발생했습니다.', { id: toastId });
         } finally {
             setLoading(false);
         }
@@ -217,17 +219,6 @@ export default function AdminMainPageForm({ initialData, onSubmit }: AdminMainPa
                     />
                 </div>
             </div>
-
-            {message && (
-                <p style={{
-                    color: message.includes('오류') ? '#ff6b6b' : '#51cf66',
-                    marginBottom: '1rem',
-                    textAlign: 'center',
-                    fontWeight: 500
-                }}>
-                    {message}
-                </p>
-            )}
 
             <Button type="submit" fullWidth disabled={loading}>
                 {loading ? 'Saving...' : 'Save Changes'}
