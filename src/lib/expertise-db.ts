@@ -7,7 +7,7 @@ const DATA_FILE_PATH = path.join(process.cwd(), 'data', 'expertise.json');
 
 // 전역 클라이언트 캐싱 (핫 리로드 시 다중 연결 방지)
 let globalWithRedis = global as typeof globalThis & {
-  _redisClientExportise?: Redis;
+  _redisClientExpertise?: Redis;
 };
 
 async function getRedisClient() {
@@ -15,13 +15,13 @@ async function getRedisClient() {
         throw new Error('REDIS_URL 환경 변수가 누락되었습니다. Vercel 환경 변수에 REDIS_URL을 등록해주세요.');
     }
 
-    if (!globalWithRedis._redisClientExportise) {
+    if (!globalWithRedis._redisClientExpertise) {
         const client = new Redis(process.env.REDIS_URL);
         client.on('error', (err) => console.error('Redis Client Error', err));
-        globalWithRedis._redisClientExportise = client;
+        globalWithRedis._redisClientExpertise = client;
     }
     
-    return globalWithRedis._redisClientExportise;
+    return globalWithRedis._redisClientExpertise;
 }
 
 export async function getExpertiseList(): Promise<TechnicalExpertise[]> {
@@ -32,7 +32,8 @@ export async function getExpertiseList(): Promise<TechnicalExpertise[]> {
             
             if (dataStr) {
                 const cached = JSON.parse(dataStr) as TechnicalExpertise[];
-                if (Array.isArray(cached) && cached.length > 0) {
+                // 빈 배열이어도 Redis에 데이터가 있는 것이므로 반환 (폴백 방지)
+                if (Array.isArray(cached)) {
                     return cached.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
                 }
             }

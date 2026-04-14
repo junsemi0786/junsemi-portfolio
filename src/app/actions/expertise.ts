@@ -24,6 +24,7 @@ export async function updateExpertiseAction(id: string, data: Partial<ExpertiseF
         return { error: e.message || '저장 중 오류가 발생했습니다.' };
     }
     revalidatePath('/expertise');
+    revalidatePath(`/expertise/${id}`);
     revalidatePath('/admin/expertise');
     revalidatePath('/');
     redirect('/admin/expertise');
@@ -32,11 +33,13 @@ export async function updateExpertiseAction(id: string, data: Partial<ExpertiseF
 export async function deleteExpertiseAction(id: string) {
     try {
         await deleteExpertise(id);
+        revalidatePath('/expertise');
+        revalidatePath(`/expertise/${id}`);
+        revalidatePath('/admin/expertise');
+        revalidatePath('/');
+        return { success: true };
     } catch (e: any) {
-        return { error: e.message || '저장 중 오류가 발생했습니다.' };
+        console.error('Delete expertise error:', e);
+        return { error: e.message || '삭제 중 오류가 발생했습니다.' };
     }
-    revalidatePath('/expertise');
-    revalidatePath('/admin/expertise');
-    revalidatePath('/');
-    redirect('/admin/expertise');
 }
