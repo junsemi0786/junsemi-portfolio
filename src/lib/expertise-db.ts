@@ -2,21 +2,15 @@ import fs from 'fs/promises';
 import path from 'path';
 import { TechnicalExpertise, ExpertiseFormData } from '@/types/expertise';
 
+// Vercel(서버리스) 환경을 위한 인메모리 캐시
+let expertiseCache: TechnicalExpertise[] | null = null;
 const DATA_FILE_PATH = path.join(process.cwd(), 'data', 'expertise.json');
 
-async function ensureDataFile() {
-    try {
-        await fs.access(DATA_FILE_PATH);
-    } catch {
-        const initialData: TechnicalExpertise[] = [];
-        await fs.writeFile(DATA_FILE_PATH, JSON.stringify(initialData, null, 2));
-    }
-}
-
 export async function getExpertiseList(): Promise<TechnicalExpertise[]> {
-    await ensureDataFile();
-    const fileContent = await fs.readFile(DATA_FILE_PATH, 'utf-8');
+    if (expertiseCache) return expertiseCache;
+
     try {
+        const fileContent = await fs.readFile(DATA_FILE_PATH, 'utf-8');
         const list = JSON.parse(fileContent) as TechnicalExpertise[];
         // Normalize data to ensure type safety
         const normalized = list.map(item => ({
@@ -25,10 +19,12 @@ export async function getExpertiseList(): Promise<TechnicalExpertise[]> {
             keywords: Array.isArray(item.keywords) ? item.keywords : [],
             features: Array.isArray(item.features) ? item.features : [],
         }));
-        return normalized.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+        expertiseCache = normalized.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+        return expertiseCache;
     } catch (error) {
-        console.error('Failed to parse expertise.json', error);
-        return [];
+        console.error('Failed to parse or read expertise.json', error);
+        expertiseCache = [];
+        return expertiseCache;
     }
 }
 
@@ -46,7 +42,12 @@ export async function createExpertise(data: ExpertiseFormData): Promise<Technica
     };
 
     list.push(newItem);
-    await fs.writeFile(DATA_FILE_PATH, JSON.stringify(list, null, 2));
+    expertiseCache = list;
+    
+    // Vercel 환경에서는 파일 시스템이 읽기 전용이므로 파일 쓰기 생략
+    // 데이터는 메모리에만 저장되며 콜드 스타트 시 초기화됩니다.
+    // await fs.writeFile(DATA_FILE_PATH, JSON.stringify(list, null, 2));
+    
     return newItem;
 }
 
@@ -61,8 +62,11 @@ export async function updateExpertise(id: string, data: Partial<ExpertiseFormDat
         updatedAt: new Date().toISOString(),
     };
     list[index] = updatedItem;
+    expertiseCache = list;
 
-    await fs.writeFile(DATA_FILE_PATH, JSON.stringify(list, null, 2));
+    // Vercel 환경에서는 파일 시스템이 읽기 전용이므로 파일 쓰기 생략
+    // await fs.writeFile(DATA_FILE_PATH, JSON.stringify(list, null, 2));
+    
     return updatedItem;
 }
 
@@ -72,7 +76,11 @@ export async function deleteExpertise(id: string): Promise<boolean> {
     list = list.filter((item) => item.id !== id);
 
     if (list.length === initialLength) return false;
+    
+    expertiseCache = list;
 
-    await fs.writeFile(DATA_FILE_PATH, JSON.stringify(list, null, 2));
+    // Vercel 환경에서는 파일 시스템이 읽기 전용이므로 파일 쓰기 생략
+    // await fs.writeFile(DATA_FILE_PATH, JSON.stringify(list, null, 2));
+    
     return true;
 }
