@@ -1,3 +1,4 @@
+import { kv } from '@vercel/kv';
 import fs from 'fs/promises';
 import path from 'path';
 
@@ -45,7 +46,22 @@ const defaultData: MainPageData = {
     }
 };
 
+function ensureKVSetup() {
+    if (!process.env.KV_REST_API_URL || !process.env.KV_REST_API_TOKEN) {
+        throw new Error('Vercel KV(데이터베이스) 환경설정이 누락되었습니다. 대시보드에서 환경 변수를 등록해주세요.');
+    }
+}
+
 export async function getMainPageData(): Promise<MainPageData> {
+    try {
+        const cached = await kv.get<MainPageData>('main_page_data');
+        if (cached && Object.keys(cached).length > 0) {
+            return cached;
+        }
+    } catch (e) {
+        console.warn('Vercel KV 데이터를 읽는 중 문제가 발생했거나 설정되지 않음:', e);
+    }
+
     try {
         const fileContent = await fs.readFile(DATA_FILE_PATH, 'utf-8');
         return JSON.parse(fileContent) as MainPageData;
@@ -56,5 +72,6 @@ export async function getMainPageData(): Promise<MainPageData> {
 }
 
 export async function updateMainPageData(data: MainPageData): Promise<void> {
-    await fs.writeFile(DATA_FILE_PATH, JSON.stringify(data, null, 2));
+    ensureKVSetup();
+    await kv.set('main_page_data', data);
 }

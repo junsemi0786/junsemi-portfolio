@@ -6,7 +6,7 @@ import Button from '@/components/ui/Button';
 
 interface AdminMainPageFormProps {
     initialData: MainPageData;
-    onSubmit: (data: MainPageData) => Promise<void>;
+    onSubmit: (data: MainPageData) => Promise<any>;
 }
 
 export default function AdminMainPageForm({ initialData, onSubmit }: AdminMainPageFormProps) {
@@ -24,18 +24,17 @@ export default function AdminMainPageForm({ initialData, onSubmit }: AdminMainPa
         }));
     };
 
-    // Specifically handle nested change for stats cause it's flat structure inside stats object in our type definition
-    // wait, existing type definition has sections.
-    // hero: {...}, stats: {...}, cta: {...}
-    // So handleChange logic above works if we pass 'hero', 'badge', value.
-
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
         setMessage('');
 
         try {
-            await onSubmit(formData);
+            const res = await onSubmit(formData);
+            if (res && res.error) {
+                setMessage(res.error);
+                return;
+            }
             setMessage('메인 페이지 정보가 성공적으로 업데이트되었습니다.');
         } catch (error) {
             if (error instanceof Error && (error.message === 'NEXT_REDIRECT' || error.message.includes('redirect'))) {

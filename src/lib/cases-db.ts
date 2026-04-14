@@ -1,23 +1,28 @@
+import { kv } from '@vercel/kv';
 import fs from 'fs/promises';
 import path from 'path';
 import { CaseStudy, CaseStudyFormData } from '@/types/case-study';
 
 const DATA_FILE_PATH = path.join(process.cwd(), 'data', 'cases.json');
 
-// Ensure data directory exists (utility helper)
-async function ensureDataFile() {
-    try {
-        await fs.access(DATA_FILE_PATH);
-    } catch {
-        const initialData: CaseStudy[] = [];
-        await fs.writeFile(DATA_FILE_PATH, JSON.stringify(initialData, null, 2));
+function ensureKVSetup() {
+    if (!process.env.KV_REST_API_URL || !process.env.KV_REST_API_TOKEN) {
+        throw new Error('Vercel KV(데이터베이스) 환경설정이 누락되었습니다. 대시보드에서 환경 변수를 등록해주세요.');
     }
 }
 
 export async function getCases(): Promise<CaseStudy[]> {
-    await ensureDataFile();
-    const fileContent = await fs.readFile(DATA_FILE_PATH, 'utf-8');
     try {
+        const cached = await kv.get<CaseStudy[]>('cases_data');
+        if (cached && Array.isArray(cached) && cached.length > 0) {
+            return cached.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+        }
+    } catch (e) {
+        console.warn('Vercel KV 데이터를 읽는 중 문제가 발생했거나 설정되지 않음:', e);
+    }
+
+    try {
+        const fileContent = await fs.readFile(DATA_FILE_PATH, 'utf-8');
         const cases = JSON.parse(fileContent) as CaseStudy[];
         // Normalize data to ensure type safety
         const normalized = cases.map(c => ({
@@ -40,6 +45,7 @@ export async function getCaseById(id: string): Promise<CaseStudy | undefined> {
 }
 
 export async function createCase(data: CaseStudyFormData): Promise<CaseStudy> {
+    ensureKVSetup();
     const cases = await getCases();
     const newCase: CaseStudy = {
         ...data,
@@ -48,15 +54,13 @@ export async function createCase(data: CaseStudyFormData): Promise<CaseStudy> {
         updatedAt: new Date().toISOString(),
     };
 
-    // Add to beginning of list or end? Usually specific order matters.
-    // Add to end for now.
     cases.push(newCase);
-
-    await fs.writeFile(DATA_FILE_PATH, JSON.stringify(cases, null, 2));
+    await kv.set('cases_data', cases);
     return newCase;
 }
 
 export async function updateCase(id: string, data: Partial<CaseStudyFormData>): Promise<CaseStudy | null> {
+    ensureKVSetup();
     const cases = await getCases();
     const index = cases.findIndex((c) => c.id === id);
     if (index === -1) return null;
@@ -68,22 +72,24 @@ export async function updateCase(id: string, data: Partial<CaseStudyFormData>): 
     };
     cases[index] = updatedCase;
 
-    await fs.writeFile(DATA_FILE_PATH, JSON.stringify(cases, null, 2));
+    await kv.set('cases_data', cases);
     return updatedCase;
 }
 
 export async function deleteCase(id: string): Promise<boolean> {
+    ensureKVSetup();
     let cases = await getCases();
     const initialLength = cases.length;
     cases = cases.filter((c) => c.id !== id);
 
     if (cases.length === initialLength) return false;
 
-    await fs.writeFile(DATA_FILE_PATH, JSON.stringify(cases, null, 2));
+    await kv.set('cases_data', cases);
     return true;
 }
 
 export async function reorderCases(orderedIds: string[]): Promise<void> {
+    ensureKVSetup();
     const cases = await getCases();
     const casesMap = new Map(cases.map(c => [c.id, c]));
 
@@ -104,5 +110,5 @@ export async function reorderCases(orderedIds: string[]): Promise<void> {
         }
     });
 
-    await fs.writeFile(DATA_FILE_PATH, JSON.stringify(newCases, null, 2));
+    await kv.set('cases_data', newCases);
 }

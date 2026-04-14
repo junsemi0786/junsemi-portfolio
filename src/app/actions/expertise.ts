@@ -6,21 +6,33 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 export async function createExpertiseAction(data: ExpertiseFormData) {
-    await createExpertise(data);
+    try {
+        await createExpertise(data);
+    } catch (e: any) {
+        return { error: e.message || '저장 중 오류가 발생했습니다.' };
+    }
     revalidatePath('/expertise');
     revalidatePath('/admin/expertise');
     redirect('/admin/expertise');
 }
 
 export async function updateExpertiseAction(id: string, data: Partial<ExpertiseFormData>) {
-    await updateExpertise(id, data);
+    try {
+        await updateExpertise(id, data);
+    } catch (e: any) {
+        return { error: e.message || '저장 중 오류가 발생했습니다.' };
+    }
     revalidatePath('/expertise');
     revalidatePath('/admin/expertise');
     redirect('/admin/expertise');
 }
 
 export async function deleteExpertiseAction(id: string) {
-    await deleteExpertise(id);
+    try {
+        await deleteExpertise(id);
+    } catch (e: any) {
+        return { error: e.message || '저장 중 오류가 발생했습니다.' };
+    }
     revalidatePath('/expertise');
     revalidatePath('/admin/expertise');
     redirect('/admin/expertise');

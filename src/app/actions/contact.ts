@@ -4,7 +4,13 @@ import { ContactInfo, updateContactInfo } from '@/lib/contact-db';
 import { revalidatePath } from 'next/cache';
 
 export async function updateContactInfoAction(data: ContactInfo) {
-    await updateContactInfo(data);
-    revalidatePath('/contact');
-    revalidatePath('/admin/contact');
+    try {
+        await updateContactInfo(data);
+        revalidatePath('/contact');
+        revalidatePath('/admin/contact');
+        return { success: true };
+    } catch (e: any) {
+        console.error('Update contact info error:', e);
+        return { error: e.message || '저장 중 오류가 발생했습니다.' };
+    }
 }

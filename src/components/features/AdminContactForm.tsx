@@ -14,7 +14,7 @@ interface ContactInfo {
 
 interface AdminContactFormProps {
     initialData: ContactInfo;
-    onSubmit: (data: ContactInfo) => Promise<void>;
+    onSubmit: (data: ContactInfo) => Promise<any>;
 }
 
 export default function AdminContactForm({ initialData, onSubmit }: AdminContactFormProps) {
@@ -30,7 +30,11 @@ export default function AdminContactForm({ initialData, onSubmit }: AdminContact
         e.preventDefault();
         setLoading(true);
         try {
-            await onSubmit(formData);
+            const res = await onSubmit(formData);
+            if (res && res.error) {
+                alert(res.error);
+                return;
+            }
             alert('정보가 수정되었습니다.');
         } catch (error) {
             // Next.js redirect는 에러 객체를 통해 작동하므로,

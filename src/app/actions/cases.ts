@@ -6,14 +6,22 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 export async function createCaseAction(data: CaseStudyFormData) {
-    await createCase(data);
+    try {
+        await createCase(data);
+    } catch (e: any) {
+        return { error: e.message || '저장 중 오류가 발생했습니다.' };
+    }
     revalidatePath('/cases');
     revalidatePath('/admin/cases');
     redirect('/admin/cases');
 }
 
 export async function updateCaseAction(id: string, data: Partial<CaseStudyFormData>) {
-    await updateCase(id, data);
+    try {
+        await updateCase(id, data);
+    } catch (e: any) {
+        return { error: e.message || '저장 중 오류가 발생했습니다.' };
+    }
     revalidatePath('/cases');
     revalidatePath(`/cases/${id}`);
     revalidatePath('/admin/cases');
@@ -21,14 +29,23 @@ export async function updateCaseAction(id: string, data: Partial<CaseStudyFormDa
 }
 
 export async function deleteCaseAction(id: string) {
-    await deleteCase(id);
+    try {
+        await deleteCase(id);
+    } catch (e: any) {
+        return { error: e.message || '저장 중 오류가 발생했습니다.' };
+    }
     revalidatePath('/cases');
     revalidatePath('/admin/cases');
     redirect('/admin/cases');
 }
 
 export async function reorderCasesAction(orderedIds: string[]) {
-    await reorderCases(orderedIds);
+    try {
+        await reorderCases(orderedIds);
+    } catch (e: any) {
+        return { error: e.message || '저장 중 오류가 발생했습니다.' };
+    }
     revalidatePath('/cases');
     revalidatePath('/admin/cases');
+    return { success: true };
 }

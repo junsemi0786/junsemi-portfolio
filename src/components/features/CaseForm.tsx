@@ -6,7 +6,7 @@ import Button from '@/components/ui/Button';
 
 interface CaseFormProps {
     initialData?: CaseStudy;
-    onSubmit: (data: CaseStudyFormData) => Promise<void>;
+    onSubmit: (data: CaseStudyFormData) => Promise<any>;
     isEditing?: boolean;
 }
 
@@ -57,7 +57,12 @@ export default function CaseForm({ initialData, onSubmit, isEditing = false }: C
         e.preventDefault();
         setLoading(true);
         try {
-            await onSubmit(formData);
+            const res = await onSubmit(formData);
+            if (res && res.error) {
+                alert(res.error);
+                setLoading(false);
+                return; // Return early so loading is stopped and form state is preserved
+            }
         } catch (error) {
             // Next.js redirect는 에러 객체를 통해 작동하므로, 
             // 메시지가 없거나 리다이렉트 관련 에러면 다시 throw하여 작동시킴
@@ -66,9 +71,8 @@ export default function CaseForm({ initialData, onSubmit, isEditing = false }: C
             }
             console.error(error);
             alert('Failed to save case study');
-        } finally {
             setLoading(false);
-        }
+        } 
     };
 
     return (

@@ -6,7 +6,7 @@ import Button from '@/components/ui/Button';
 
 interface ExpertiseFormProps {
     initialData?: TechnicalExpertise;
-    onSubmit: (data: ExpertiseFormData) => Promise<void>;
+    onSubmit: (data: ExpertiseFormData) => Promise<any>;
     isEditing?: boolean;
 }
 
@@ -69,7 +69,12 @@ export default function ExpertiseForm({ initialData, onSubmit, isEditing = false
         }
         setLoading(true);
         try {
-            await onSubmit(formData);
+            const res = await onSubmit(formData);
+            if (res && res.error) {
+                alert(res.error);
+                setLoading(false);
+                return;
+            }
         } catch (error) {
             // Next.js redirect는 에러 객체를 통해 작동하므로,
             // NEXT_REDIRECT 에러인 경우 다시 throw하여 리다이렉트가 실행되도록 함
@@ -80,7 +85,6 @@ export default function ExpertiseForm({ initialData, onSubmit, isEditing = false
             }
             console.error(error);
             alert('저장 실패했습니다.');
-        } finally {
             setLoading(false);
         }
     };
