@@ -33,6 +33,12 @@ export default function AdminContactForm({ initialData, onSubmit }: AdminContact
             await onSubmit(formData);
             alert('정보가 수정되었습니다.');
         } catch (error) {
+            // Next.js redirect는 에러 객체를 통해 작동하므로,
+            if (error instanceof Error && (error.message === 'NEXT_REDIRECT' || error.message.includes('redirect'))) {
+                throw error;
+            } else if (error && typeof error === 'object' && 'message' in error && typeof (error as any).message === 'string' && ((error as any).message === 'NEXT_REDIRECT' || (error as any).message.includes('redirect'))) {
+                throw error;
+            }
             console.error(error);
             alert('저장 실패했습니다.');
         } finally {

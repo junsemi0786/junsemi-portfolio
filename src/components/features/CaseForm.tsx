@@ -60,9 +60,9 @@ export default function CaseForm({ initialData, onSubmit, isEditing = false }: C
             await onSubmit(formData);
         } catch (error) {
             // Next.js redirect는 에러 객체를 통해 작동하므로, 
-            // 메시지가 없거나 리다이렉트 관련 에러면 무시
+            // 메시지가 없거나 리다이렉트 관련 에러면 다시 throw하여 작동시킴
             if (error instanceof Error && (error.message === 'NEXT_REDIRECT' || error.message.includes('redirect'))) {
-                return;
+                throw error;
             }
             console.error(error);
             alert('Failed to save case study');

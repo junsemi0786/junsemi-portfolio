@@ -71,6 +71,13 @@ export default function ExpertiseForm({ initialData, onSubmit, isEditing = false
         try {
             await onSubmit(formData);
         } catch (error) {
+            // Next.js redirect는 에러 객체를 통해 작동하므로,
+            // NEXT_REDIRECT 에러인 경우 다시 throw하여 리다이렉트가 실행되도록 함
+            if (error instanceof Error && (error.message === 'NEXT_REDIRECT' || error.message.includes('redirect'))) {
+                throw error;
+            } else if (error && typeof error === 'object' && 'message' in error && typeof error.message === 'string' && (error.message === 'NEXT_REDIRECT' || error.message.includes('redirect'))) {
+                throw error;
+            }
             console.error(error);
             alert('저장 실패했습니다.');
         } finally {

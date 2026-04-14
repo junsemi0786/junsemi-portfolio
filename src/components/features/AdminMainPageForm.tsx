@@ -39,7 +39,7 @@ export default function AdminMainPageForm({ initialData, onSubmit }: AdminMainPa
             setMessage('메인 페이지 정보가 성공적으로 업데이트되었습니다.');
         } catch (error) {
             if (error instanceof Error && (error.message === 'NEXT_REDIRECT' || error.message.includes('redirect'))) {
-                return;
+                throw error;
             }
             setMessage('업데이트 중 오류가 발생했습니다.');
         } finally {
