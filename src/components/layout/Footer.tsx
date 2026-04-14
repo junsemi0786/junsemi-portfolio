@@ -4,11 +4,23 @@ import styles from './Footer.module.css';
 
 import { getExpertiseList } from '@/lib/expertise-db';
 import { getContactInfo } from '@/lib/contact-db';
+import { getRedisMemoryUsage } from '@/lib/redis-db';
+import { cookies } from 'next/headers';
 
 export default async function Footer() {
     const currentYear = new Date().getFullYear();
     const expertises = await getExpertiseList();
     const contactInfo = await getContactInfo();
+    
+    // 관리자 여부 확인
+    const cookieStore = await cookies();
+    const isAdmin = cookieStore.get('admin_session')?.value === 'true';
+    
+    // Redis 용량 확인 (관리자일 경우에만)
+    let redisUsage = '0B';
+    if (isAdmin) {
+        redisUsage = await getRedisMemoryUsage();
+    }
 
     return (
         <footer className={styles.footer}>
@@ -62,6 +74,14 @@ export default async function Footer() {
                     </div>
                     <div className={styles.visitorSection}>
                         <div className={styles.visitorBadges}>
+                            {/* DB 사용량 (관리자 전용) */}
+                            {isAdmin && (
+                                <div className={styles.dbBadge} title="Vercel KV (Redis) Usage">
+                                    <span className={styles.dbBadgeLabel}>DB</span>
+                                    <span className={styles.dbBadgeValue}>{redisUsage} / 30MB</span>
+                                </div>
+                            )}
+
                             {/* 당일 방문자 */}
                             <div className={styles.badgeWrapper} style={{ marginRight: '8px' }}>
                                 {/* eslint-disable-next-line @next/next/no-img-element */}

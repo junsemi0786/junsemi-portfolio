@@ -105,8 +105,10 @@
 
 .visitorBadges {
     display: flex;
+    flex-wrap: wrap;
     gap: 8px;
     align-items: center;
+    justify-content: center;
 }
 
 .badgeWrapper {
@@ -116,6 +118,36 @@
 
 .badgeWrapper:hover {
     opacity: 1;
+}
+
+.dbBadge {
+    display: flex;
+    align-items: center;
+    height: 22px;
+    background-color: #003366;
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-right: 8px;
+}
+
+.dbBadgeLabel {
+    background-color: #555;
+    padding: 0 6px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+}
+
+.dbBadgeValue {
+    padding: 0 6px;
+    height: 100%;
+    display: flex;
+    align-items: center;
 }
 
 @media (max-width: 768px) {
