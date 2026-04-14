@@ -26,8 +26,10 @@ async function getRedisClient() {
 
 export async function getRedisMemoryUsage(): Promise<string> {
     try {
+        if (!process.env.REDIS_URL) return '...';
+        
         const client = await getRedisClient();
-        if (!client) return '0B';
+        if (!client) return '...';
 
         const info = await client.info('memory');
         const match = info.match(/used_memory_human:(.*)/);
@@ -36,9 +38,9 @@ export async function getRedisMemoryUsage(): Promise<string> {
             return match[1].trim();
         }
         
-        return '0B';
+        return '...';
     } catch (e) {
         console.error('Failed to fetch Redis memory usage:', e);
-        return 'Error';
+        return '...';
     }
 }

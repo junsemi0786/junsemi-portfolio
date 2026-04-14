@@ -12,14 +12,19 @@ export default async function Footer() {
     const expertises = await getExpertiseList();
     const contactInfo = await getContactInfo();
     
-    // 관리자 여부 확인
-    const cookieStore = await cookies();
-    const isAdmin = cookieStore.get('admin_session')?.value === 'true';
+    // 관리자 여부 및 DB 사용량 확인 (에러 방지 처리)
+    let isAdmin = false;
+    let redisUsage = '...';
     
-    // Redis 용량 확인 (관리자일 경우에만)
-    let redisUsage = '0B';
-    if (isAdmin) {
-        redisUsage = await getRedisMemoryUsage();
+    try {
+        const cookieStore = await cookies();
+        isAdmin = cookieStore.get('admin_session')?.value === 'true';
+        
+        if (isAdmin) {
+            redisUsage = await getRedisMemoryUsage();
+        }
+    } catch (e) {
+        console.error('Footer auth check error:', e);
     }
 
     return (
@@ -86,7 +91,7 @@ export default async function Footer() {
                             <div className={styles.badgeWrapper} style={{ marginRight: '8px' }}>
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img
-                                    src={`https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fjunsemi.co.kr-today-${new Date().toISOString().split('T')[0]}&label=TODAY&labelColor=003366&countColor=003366&style=flat-square&t=${Date.now()}`}
+                                    src={`https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fjunsemi.co.kr-today-${currentYear}-${new Date().getMonth() + 1}-${new Date().getDate()}&label=TODAY&labelColor=003366&countColor=003366&style=flat-square`}
                                     alt="Today Visitors"
                                     style={{ height: '22px', display: 'block' }}
                                 />
@@ -95,7 +100,7 @@ export default async function Footer() {
                             <div className={styles.badgeWrapper}>
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img
-                                    src={`https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fjunsemi.co.kr&label=TOTAL&labelColor=003366&countColor=003366&style=flat-square&t=${Date.now()}`}
+                                    src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fjunsemi.co.kr&label=TOTAL&labelColor=003366&countColor=003366&style=flat-square"
                                     alt="Total Visitors"
                                     style={{ height: '22px', display: 'block' }}
                                 />
