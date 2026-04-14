@@ -1,4 +1,4 @@
-import { kv } from '@vercel/kv';
+import { createClient } from 'redis';
 import fs from 'fs/promises';
 import path from 'path';
 
@@ -13,20 +13,39 @@ export interface ContactInfo {
     mapMessage?: string;
 }
 
-function ensureKVSetup() {
-    if (!process.env.KV_REST_API_URL || !process.env.KV_REST_API_TOKEN) {
-        throw new Error('Vercel KV(데이터베이스) 환경설정이 누락되었습니다. 대시보드에서 환경 변수를 등록해주세요.');
+let globalWithRedis = global as typeof globalThis & {
+  _redisClientContact?: ReturnType<typeof createClient>;
+};
+
+async function getRedisClient() {
+    if (!process.env.REDIS_URL) {
+        throw new Error('REDIS_URL 환경 변수가 누락되었습니다.\nVercel 환경 변수에 REDIS_URL을 등록해주세요.');
     }
+
+    if (!globalWithRedis._redisClientContact) {
+        const client = createClient({ url: process.env.REDIS_URL });
+        client.on('error', (err) => console.error('Redis Client Error', err));
+        await client.connect();
+        globalWithRedis._redisClientContact = client;
+    }
+    
+    return globalWithRedis._redisClientContact;
 }
 
 export async function getContactInfo(): Promise<ContactInfo> {
     try {
-        const cached = await kv.get<ContactInfo>('contact_info');
-        if (cached && Object.keys(cached).length > 0) {
-            return cached;
+        if (process.env.REDIS_URL) {
+            const client = await getRedisClient();
+            const dataStr = await client.get('contact_info');
+            if (dataStr) {
+                const cached = JSON.parse(dataStr) as ContactInfo;
+                if (cached && Object.keys(cached).length > 0) {
+                    return cached;
+                }
+            }
         }
     } catch (e) {
-        console.warn('Vercel KV 데이터를 읽는 중 문제가 발생했거나 설정되지 않음:', e);
+        console.warn('Redis 데이터를 읽는 중 문제가 발생했거나 연결 실패:', e);
     }
 
     try {
@@ -46,6 +65,6 @@ export async function getContactInfo(): Promise<ContactInfo> {
 }
 
 export async function updateContactInfo(data: ContactInfo): Promise<void> {
-    ensureKVSetup();
-    await kv.set('contact_info', data);
+    const client = await getRedisClient();
+    await client.set('contact_info', JSON.stringify(data));
 }

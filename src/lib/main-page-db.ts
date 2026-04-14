@@ -1,4 +1,4 @@
-import { kv } from '@vercel/kv';
+import { createClient } from 'redis';
 import fs from 'fs/promises';
 import path from 'path';
 
@@ -46,20 +46,39 @@ const defaultData: MainPageData = {
     }
 };
 
-function ensureKVSetup() {
-    if (!process.env.KV_REST_API_URL || !process.env.KV_REST_API_TOKEN) {
-        throw new Error('Vercel KV(데이터베이스) 환경설정이 누락되었습니다. 대시보드에서 환경 변수를 등록해주세요.');
+let globalWithRedis = global as typeof globalThis & {
+  _redisClientMain?: ReturnType<typeof createClient>;
+};
+
+async function getRedisClient() {
+    if (!process.env.REDIS_URL) {
+        throw new Error('REDIS_URL 환경 변수가 누락되었습니다.\nVercel 환경 변수에 REDIS_URL을 등록해주세요.');
     }
+
+    if (!globalWithRedis._redisClientMain) {
+        const client = createClient({ url: process.env.REDIS_URL });
+        client.on('error', (err) => console.error('Redis Client Error', err));
+        await client.connect();
+        globalWithRedis._redisClientMain = client;
+    }
+    
+    return globalWithRedis._redisClientMain;
 }
 
 export async function getMainPageData(): Promise<MainPageData> {
     try {
-        const cached = await kv.get<MainPageData>('main_page_data');
-        if (cached && Object.keys(cached).length > 0) {
-            return cached;
+        if (process.env.REDIS_URL) {
+            const client = await getRedisClient();
+            const dataStr = await client.get('main_page_data');
+            if (dataStr) {
+                const cached = JSON.parse(dataStr) as MainPageData;
+                if (cached && Object.keys(cached).length > 0) {
+                    return cached;
+                }
+            }
         }
     } catch (e) {
-        console.warn('Vercel KV 데이터를 읽는 중 문제가 발생했거나 설정되지 않음:', e);
+        console.warn('Redis 데이터를 읽는 중 문제가 발생했거나 연결 실패:', e);
     }
 
     try {
@@ -72,6 +91,6 @@ export async function getMainPageData(): Promise<MainPageData> {
 }
 
 export async function updateMainPageData(data: MainPageData): Promise<void> {
-    ensureKVSetup();
-    await kv.set('main_page_data', data);
+    const client = await getRedisClient();
+    await client.set('main_page_data', JSON.stringify(data));
 }

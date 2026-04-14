@@ -1,24 +1,43 @@
-import { kv } from '@vercel/kv';
+import { createClient } from 'redis';
 import fs from 'fs/promises';
 import path from 'path';
 import { CaseStudy, CaseStudyFormData } from '@/types/case-study';
 
 const DATA_FILE_PATH = path.join(process.cwd(), 'data', 'cases.json');
 
-function ensureKVSetup() {
-    if (!process.env.KV_REST_API_URL || !process.env.KV_REST_API_TOKEN) {
-        throw new Error('Vercel KV(데이터베이스) 환경설정이 누락되었습니다. 대시보드에서 환경 변수를 등록해주세요.');
+let globalWithRedis = global as typeof globalThis & {
+  _redisClientCases?: ReturnType<typeof createClient>;
+};
+
+async function getRedisClient() {
+    if (!process.env.REDIS_URL) {
+        throw new Error('REDIS_URL 환경 변수가 누락되었습니다.\nVercel 환경 변수에 REDIS_URL을 등록해주세요.');
     }
+
+    if (!globalWithRedis._redisClientCases) {
+        const client = createClient({ url: process.env.REDIS_URL });
+        client.on('error', (err) => console.error('Redis Client Error', err));
+        await client.connect();
+        globalWithRedis._redisClientCases = client;
+    }
+    
+    return globalWithRedis._redisClientCases;
 }
 
 export async function getCases(): Promise<CaseStudy[]> {
     try {
-        const cached = await kv.get<CaseStudy[]>('cases_data');
-        if (cached && Array.isArray(cached) && cached.length > 0) {
-            return cached.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+        if (process.env.REDIS_URL) {
+            const client = await getRedisClient();
+            const dataStr = await client.get('cases_data');
+            if (dataStr) {
+                const cached = JSON.parse(dataStr) as CaseStudy[];
+                if (Array.isArray(cached) && cached.length > 0) {
+                    return cached.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+                }
+            }
         }
     } catch (e) {
-        console.warn('Vercel KV 데이터를 읽는 중 문제가 발생했거나 설정되지 않음:', e);
+        console.warn('Redis 데이터를 읽는 중 문제가 발생했거나 연결 실패:', e);
     }
 
     try {
@@ -45,7 +64,7 @@ export async function getCaseById(id: string): Promise<CaseStudy | undefined> {
 }
 
 export async function createCase(data: CaseStudyFormData): Promise<CaseStudy> {
-    ensureKVSetup();
+    const client = await getRedisClient();
     const cases = await getCases();
     const newCase: CaseStudy = {
         ...data,
@@ -55,12 +74,12 @@ export async function createCase(data: CaseStudyFormData): Promise<CaseStudy> {
     };
 
     cases.push(newCase);
-    await kv.set('cases_data', cases);
+    await client.set('cases_data', JSON.stringify(cases));
     return newCase;
 }
 
 export async function updateCase(id: string, data: Partial<CaseStudyFormData>): Promise<CaseStudy | null> {
-    ensureKVSetup();
+    const client = await getRedisClient();
     const cases = await getCases();
     const index = cases.findIndex((c) => c.id === id);
     if (index === -1) return null;
@@ -72,24 +91,24 @@ export async function updateCase(id: string, data: Partial<CaseStudyFormData>): 
     };
     cases[index] = updatedCase;
 
-    await kv.set('cases_data', cases);
+    await client.set('cases_data', JSON.stringify(cases));
     return updatedCase;
 }
 
 export async function deleteCase(id: string): Promise<boolean> {
-    ensureKVSetup();
+    const client = await getRedisClient();
     let cases = await getCases();
     const initialLength = cases.length;
     cases = cases.filter((c) => c.id !== id);
 
     if (cases.length === initialLength) return false;
 
-    await kv.set('cases_data', cases);
+    await client.set('cases_data', JSON.stringify(cases));
     return true;
 }
 
 export async function reorderCases(orderedIds: string[]): Promise<void> {
-    ensureKVSetup();
+    const client = await getRedisClient();
     const cases = await getCases();
     const casesMap = new Map(cases.map(c => [c.id, c]));
 
@@ -110,5 +129,5 @@ export async function reorderCases(orderedIds: string[]): Promise<void> {
         }
     });
 
-    await kv.set('cases_data', newCases);
+    await client.set('cases_data', JSON.stringify(newCases));
 }
