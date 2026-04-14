@@ -3,9 +3,9 @@ import AdminSettingsForm from '@/components/features/AdminSettingsForm';
 
 export default function AdminSettingsPage() {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const handleUpdatePassword = async (newPassword: string) => {
+    const handleUpdatePassword = async (currentPassword: string, newPassword: string) => {
         'use server';
-        return await updateAdminPasswordAction(newPassword);
+        return await updateAdminPasswordAction(currentPassword, newPassword);
     };
 
     return (
