@@ -1,36 +1,18 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# JUNgenius · 제이유엔지니어스
 
-## Getting Started
+반도체 Legacy 장비 개조·수명연장과 PLC·SCADA 기술 서비스 홈페이지입니다.
 
-First, run the development server:
+- [프로젝트 관리·검색 설정·배포 안내](RENEWAL_GUIDE.md)
+- [검증 기록](VERIFICATION.md)
+- [추가 Case Study 준비 자료](CASE_STUDY_DRAFTS.md)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 미리보기
+
+의존성이 설치되어 있다면 macOS에서 `미리보기 시작.command`를 실행합니다. 화면에 표시되는 주소를 열고, 프로젝트 관리에 필요한 로컬 비밀번호는 같은 실행 창에서 확인합니다. 이 실행 파일은 운영 Redis 연결을 끄고 별도 로컬 데이터만 사용합니다.
+
+```sh
+npm ci
+npm run dev -- --hostname 127.0.0.1 --port 3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+운영 환경은 기존 Vercel 프로젝트와 Redis를 유지합니다. 배포 설정은 `RENEWAL_GUIDE.md`를 확인하세요. `.env.local`과 `.local-data/`는 Git에 포함하지 않습니다.

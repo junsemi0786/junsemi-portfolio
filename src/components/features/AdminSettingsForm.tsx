@@ -1,75 +1,96 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import Button from '@/components/ui/Button';
-import toast from 'react-hot-toast';
+import { useState } from "react";
+import Button from "@/components/ui/Button";
+import toast from "react-hot-toast";
 
 interface AdminSettingsFormProps {
-    onSubmit: (currentPassword: string, newPassword: string) => Promise<any>;
+  onSubmit: (
+    currentPassword: string,
+    newPassword: string,
+  ) => Promise<{ error?: string; success?: boolean } | void>;
 }
 
-export default function AdminSettingsForm({ onSubmit }: AdminSettingsFormProps) {
-    const [loading, setLoading] = useState(false);
-    const [currentPassword, setCurrentPassword] = useState('');
-    const [newPassword, setNewPassword] = useState('');
+export default function AdminSettingsForm({
+  onSubmit,
+}: AdminSettingsFormProps) {
+  const [loading, setLoading] = useState(false);
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setLoading(true);
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
 
-        const toastId = toast.loading('저장 중...');
+    const toastId = toast.loading("저장 중...");
 
-        try {
-            const res = await onSubmit(currentPassword, newPassword);
-            if (res && res.error) {
-                toast.error(res.error, { id: toastId });
-                return;
-            }
-            toast.success('비밀번호가 성공적으로 변경되었습니다.', { id: toastId });
-            setCurrentPassword(''); 
-            setNewPassword(''); 
-        } catch (error) {
-            toast.error('변경 중 오류가 발생했습니다.', { id: toastId });
-        } finally {
-            setLoading(false);
-        }
-    };
+    try {
+      const res = await onSubmit(currentPassword, newPassword);
+      if (res && res.error) {
+        toast.error(res.error, { id: toastId });
+        return;
+      }
+      toast.success("비밀번호가 성공적으로 변경되었습니다.", { id: toastId });
+      setCurrentPassword("");
+      setNewPassword("");
+    } catch {
+      toast.error("변경 중 오류가 발생했습니다.", { id: toastId });
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    return (
-        <form onSubmit={handleSubmit}>
-            <div className="form-group" style={{ marginBottom: '1.5rem' }}>
-                <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600 }}>현재 비밀번호</label>
-                <input
-                    type="password"
-                    value={currentPassword}
-                    onChange={(e) => setCurrentPassword(e.target.value)}
-                    required
-                    placeholder="현재 비밀번호 입력"
-                    style={{ 
-                        width: '100%', padding: '10px', borderRadius: '4px', 
-                        border: '1px solid #444', background: '#222', color: 'white' 
-                    }}
-                />
-            </div>
+  return (
+    <form onSubmit={handleSubmit}>
+      <div className="form-group" style={{ marginBottom: "1.5rem" }}>
+        <label
+          style={{ display: "block", marginBottom: "0.5rem", fontWeight: 600 }}
+        >
+          현재 비밀번호
+        </label>
+        <input
+          type="password"
+          value={currentPassword}
+          onChange={(e) => setCurrentPassword(e.target.value)}
+          required
+          placeholder="현재 비밀번호 입력"
+          style={{
+            width: "100%",
+            padding: "10px",
+            borderRadius: "4px",
+            border: "1px solid #444",
+            background: "#222",
+            color: "white",
+          }}
+        />
+      </div>
 
-            <div className="form-group" style={{ marginBottom: '1.5rem' }}>
-                <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600 }}>새 비밀번호</label>
-                <input
-                    type="password"
-                    value={newPassword}
-                    onChange={(e) => setNewPassword(e.target.value)}
-                    required
-                    placeholder="새로운 비밀번호 입력"
-                    style={{ 
-                        width: '100%', padding: '10px', borderRadius: '4px', 
-                        border: '1px solid #444', background: '#222', color: 'white' 
-                    }}
-                />
-            </div>
+      <div className="form-group" style={{ marginBottom: "1.5rem" }}>
+        <label
+          style={{ display: "block", marginBottom: "0.5rem", fontWeight: 600 }}
+        >
+          새 비밀번호
+        </label>
+        <input
+          type="password"
+          value={newPassword}
+          onChange={(e) => setNewPassword(e.target.value)}
+          required
+          placeholder="새로운 비밀번호 입력"
+          style={{
+            width: "100%",
+            padding: "10px",
+            borderRadius: "4px",
+            border: "1px solid #444",
+            background: "#222",
+            color: "white",
+          }}
+        />
+      </div>
 
-            <Button type="submit" disabled={loading} fullWidth>
-                {loading ? '저장 중...' : '비밀번호 변경'}
-            </Button>
-        </form>
-    );
+      <Button type="submit" disabled={loading} fullWidth>
+        {loading ? "저장 중..." : "비밀번호 변경"}
+      </Button>
+    </form>
+  );
 }

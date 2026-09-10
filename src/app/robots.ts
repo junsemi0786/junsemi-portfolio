@@ -1,11 +1,10 @@
-import { MetadataRoute } from 'next';
-
+import type { MetadataRoute } from "next";
+import { SITE_URL, isProductionSite } from "@/lib/site";
 export default function robots(): MetadataRoute.Robots {
-    return {
-        rules: {
-            userAgent: '*',
-            allow: '/',
-        },
-        sitemap: 'https://www.engineering-platform.com/sitemap.xml',
-    };
+  return {
+    rules: isProductionSite
+      ? { userAgent: "*", allow: "/", disallow: ["/admin", "/api/"] }
+      : { userAgent: "*", disallow: "/" },
+    sitemap: `${SITE_URL}/sitemap.xml`,
+  };
 }

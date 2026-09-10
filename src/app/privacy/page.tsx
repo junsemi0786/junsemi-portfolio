@@ -1,31 +1,34 @@
-import React from 'react';
-
-export const metadata = {
-  title: '개인정보처리방침 | 반도체 WET 세정설비 개조개선 전문',
-  description: '서비스 개인정보처리방침입니다.',
-};
-
-export default function PrivacyPage() {
+import { pageMetadata } from "@/lib/site";
+export const metadata = pageMetadata(
+  "개인정보처리방침",
+  "제이유엔지니어스 이메일 문의와 개인정보 처리 안내.",
+  "/privacy",
+);
+export default function Privacy() {
   return (
-    <main style={{ padding: '4rem 2rem', maxWidth: '800px', margin: '0 auto', lineHeight: '1.6' }}>
-      <h1 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '2rem' }}>개인정보처리방침</h1>
-      <section style={{ marginBottom: '2rem' }}>
-        <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>1. 개인정보의 처리 목적</h2>
-        <p>회사는 다음의 목적을 위하여 개인정보를 처리합니다. 처리하고 있는 개인정보는 다음의 목적 이외의 용도로는 이용되지 않으며, 이용 목적이 변경되는 경우에는 사전 동의를 구하는 등 필요한 조치를 이행할 예정입니다.</p>
-        <ul style={{ listStyleType: 'disc', paddingLeft: '1.5rem', marginTop: '0.5rem' }}>
-          <li>서비스 제공 및 계약의 이행</li>
-          <li>회원 관리 및 고객 상담</li>
-        </ul>
-      </section>
-      <section style={{ marginBottom: '2rem' }}>
-        <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>2. 수집하는 개인정보 항목</h2>
-        <p>회사는 고객 문의 및 상담 등을 위해 아래와 같은 개인정보를 수집하고 있습니다. (내용 추가 필요)</p>
-      </section>
-      <section style={{ marginBottom: '2rem' }}>
-        <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>3. 개인정보의 파기</h2>
-        <p>회사는 원칙적으로 개인정보 처리목적이 달성된 경우에는 지체 없이 해당 개인정보를 파기합니다.</p>
-      </section>
-      <p style={{ marginTop: '2rem', color: '#666' }}>※ 본 개인정보처리방침은 기본 템플릿이며, 실제 서비스에 맞게 및 수정이 필요합니다.</p>
-    </main>
+    <article className="section container prose">
+      <h1>개인정보처리방침</h1>
+      <h2>이메일 문의</h2>
+      <p>
+        제이유엔지니어스는 문의자가 이메일로 제공한 회사명, 담당자명, 이메일
+        주소, 문의 내용과 첨부 자료를 상담, 견적 협의 및 관련 업무 연락에
+        사용합니다.
+      </p>
+      <h2>홈페이지 문의 초안</h2>
+      <p>
+        홈페이지의 양식은 사용자의 브라우저에서 이메일 초안을 만듭니다. 초안
+        입력만으로 홈페이지 서버에 문의를 접수하거나 저장하지 않습니다. 사용자가
+        이메일을 발송한 경우 이메일 서비스로 전달됩니다.
+      </p>
+      <h2>보유 및 삭제 요청</h2>
+      <p>
+        문의 처리 목적이 끝난 개인정보는 지체 없이 파기합니다. 계약 진행이나
+        관련 법령에 따라 보관이 필요한 자료는 해당 목적과 기간에 맞게
+        관리합니다. 열람, 정정, 삭제 등 개인정보 관련 요청은
+        hello@junsemi.co.kr로 보내주세요.
+      </p>
+      <h2>관리 및 문의</h2>
+      <p>개인정보 관련 담당: 강성준 · hello@junsemi.co.kr</p>
+    </article>
   );
 }

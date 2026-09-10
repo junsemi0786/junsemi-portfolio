@@ -1,79 +1,83 @@
-import type { Metadata } from 'next';
-import Image from 'next/image';
-import Link from 'next/link';
-import { notFound } from 'next/navigation';
-import { getExpertiseById, getExpertiseList } from '@/lib/expertise-db';
-import styles from './ExpertiseDetail.module.css';
-
-// Generate static params for existing items
-export async function generateStaticParams() {
-    const list = await getExpertiseList();
-    return list.map((item) => ({
-        id: item.id,
-    }));
+import Link from "next/link";
+import Image from "next/image";
+import { notFound } from "next/navigation";
+import { getExpertiseById } from "@/lib/expertise-db";
+import { pageMetadata } from "@/lib/site";
+import InquiryCTA from "@/components/features/InquiryCTA";
+export const dynamic = "force-dynamic";
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const item = await getExpertiseById(id);
+  return item
+    ? pageMetadata(item.title, item.description, `/expertise/${id}`)
+    : { title: "기술 역량을 찾을 수 없습니다", robots: { index: false } };
 }
-
-export async function generateMetadata(props: { params: Promise<{ id: string }> }): Promise<Metadata> {
-    const params = await props.params;
-    const item = await getExpertiseById(params.id);
-    if (!item) return { title: 'Expertise Not Found' };
-
-    return {
-        title: `${item.title} | Technical Expertise`,
-        description: item.description,
-    };
-}
-
-export default async function ExpertiseDetailPage(props: { params: Promise<{ id: string }> }) {
-    const params = await props.params;
-    const item = await getExpertiseById(params.id);
-
-    if (!item) {
-        notFound();
-    }
-
-    return (
-        <main className={styles.container}>
-            <Link href="/expertise" className={styles.backLink}>
-                ← Back to Expertise
-            </Link>
-
-            <div className={styles.contentWrapper}>
-                <div className={styles.imageSection}>
-                    <Image
-                        src={item.imageSrc}
-                        alt={item.title}
-                        fill
-                        className={styles.image}
-                        priority
-                    />
-                </div>
-
-                <div className={styles.textSection}>
-                    <span className={styles.subtitle}>{item.subtitle}</span>
-                    <h1 className={styles.title}>{item.title}</h1>
-                    <p className={styles.description}>{item.description}</p>
-
-                    <h3 className={styles.sectionTitle}>Key Features</h3>
-                    <ul className={styles.featuresList}>
-                        {item.features.map((feature, index) => (
-                            <li key={index} className={styles.featureItem}>
-                                <span className={styles.checkIcon}>✓</span>
-                                {feature}
-                            </li>
-                        ))}
-                    </ul>
-
-                    <h3 className={styles.sectionTitle}>Related Keywords</h3>
-                    <div className={styles.keywords}>
-                        {item.keywords.map((keyword, index) => (
-                            <span key={index} className={styles.keyword}>
-                                #{keyword}
-                            </span>
-                        ))}
-                    </div>
-                </div>
+export default async function ExpertiseDetail({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const item = await getExpertiseById(id);
+  if (!item) notFound();
+  return (
+    <>
+      <header className="page-intro container">
+        <nav className="breadcrumbs" aria-label="현재 위치">
+          <Link href="/expertise">기술 서비스</Link>
+          <span>/</span>
+          <span>{item.subtitle}</span>
+        </nav>
+        <h1>{item.title}</h1>
+        <p className="lead">{item.description}</p>
+      </header>
+      <section
+        className="section container content-layout"
+        style={{ paddingTop: 0 }}
+      >
+        <div>
+          {item.imageSrc && (
+            <div className="case-cover">
+              <Image
+                src={item.imageSrc}
+                alt={item.title}
+                fill
+                sizes="(max-width:900px) 100vw, 800px"
+                priority
+              />
             </div>
-        </main>
-    );
+          )}
+          <div className="prose">
+            <h2>지원 기술</h2>
+            <ul>
+              {item.features.map((f, i) => (
+                <li key={i}>{f}</li>
+              ))}
+            </ul>
+          </div>
+          <div className="tags">
+            {item.keywords.map((k, i) => (
+              <span className="tag" key={i}>
+                {k}
+              </span>
+            ))}
+          </div>
+        </div>
+        <aside className="aside-panel">
+          <h2>현재 구성부터 확인합니다.</h2>
+          <p>모델명, 현재 증상과 보유 자료를 이메일로 알려주세요.</p>
+          <Link href="/contact" className="btn-primary">
+            기술 문의 ↗
+          </Link>
+        </aside>
+      </section>
+      <section className="section container">
+        <InquiryCTA />
+      </section>
+    </>
+  );
 }

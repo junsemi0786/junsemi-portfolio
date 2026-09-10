@@ -1,38 +1,52 @@
 import type { Metadata } from "next";
-import { Noto_Sans_KR } from "next/font/google";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import ToastProvider from "@/components/providers/ToastProvider";
+import { BRAND, SITE_URL, EMAIL, isProductionSite, jsonLd } from "@/lib/site";
 import "./globals.css";
-
-const notoSansKr = Noto_Sans_KR({
-  subsets: ["latin"],
-  weight: ["100", "300", "400", "500", "700", "900"],
-  variable: "--font-noto-sans-kr",
-});
-
 export const metadata: Metadata = {
-  title: "부천 PLC, 전장 & SCADA | 엔지니어링 플랫폼",
-  description: "반도체 장비 리퍼비시부터 관공서 SCADA 구축까지. 부천/경기 지역 노후 설비 수명 연장과 스마트 제어 전문 기업.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: `${BRAND} | 반도체 장비 개조·PLC·SCADA`,
+    template: `%s | ${BRAND}`,
+  },
+  description:
+    "반도체 Legacy 장비 Retrofit·수명연장, 산업 자동제어 예방진단, PLC·HMI 개선과 CIMON SCADA 유지보수. 현장 문제와 기존 구성에 맞는 기술 서비스를 제공합니다.",
+  robots: { index: isProductionSite, follow: isProductionSite },
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION,
+    other: process.env.NAVER_SITE_VERIFICATION
+      ? { "naver-site-verification": process.env.NAVER_SITE_VERIFICATION }
+      : {},
+  },
 };
-
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="ko">
-      <body className={notoSansKr.className}>
+      <body>
         <LanguageProvider>
           <ToastProvider />
           <Header />
-          <main style={{ minHeight: 'calc(100vh - var(--header-height))', paddingTop: 'var(--header-height)' }}>
-            {children}
-          </main>
+          <main id="main-content">{children}</main>
           <Footer />
         </LanguageProvider>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: jsonLd({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: BRAND,
+              url: SITE_URL,
+              logo: `${SITE_URL}/images/logo_v2.png`,
+              email: EMAIL,
+              founder: { "@type": "Person", name: "강성준" },
+            }),
+          }}
+        />
       </body>
     </html>
   );

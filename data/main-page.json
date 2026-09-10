@@ -1,20 +1,20 @@
 {
   "hero": {
-    "badge": "Engineered Precision",
-    "titleLine1": "Smart Engineering",
-    "titleLine2": "For Future Industry",
-    "description": "반도체 장비 리퍼비시 개조,개선. 관공서 SCADA & PLC 유지보수까지.\n생산 현장 문제를 기술과 데이터로 해결합니다."
+    "badge": "JUNgenius · Field Engineering",
+    "titleLine1": "익숙한 설비에,",
+    "titleLine2": "다음 수명을 더합니다.",
+    "description": "반도체 Legacy 장비 개조·수명연장부터 산업 자동제어 예방진단까지.\nPLC·SCADA와 현장 데이터를 바탕으로 필요한 개선을 만듭니다."
   },
   "stats": {
-    "yearsExp": "15+",
-    "yearsLabel": "Years Exp",
-    "successRate": "100%",
-    "successLabel": "Success Rate",
-    "support": "24h",
-    "supportLabel": "Support"
+    "yearsExp": "",
+    "yearsLabel": "",
+    "successRate": "",
+    "successLabel": "",
+    "support": "",
+    "supportLabel": ""
   },
   "cta": {
-    "title": "엔지니어링의 미래를 경험하세요",
-    "description": "복잡한 산업 현장의 문제를 해결하고, 생산성을 극대화하는 맞춤형 솔루션을 제공합니다."
+    "title": "모델명과 현재 증상부터 알려주세요.",
+    "description": "기술 자료를 바탕으로 작업 범위와 필요한 점검을 협의합니다."
   }
 }

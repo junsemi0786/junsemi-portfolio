@@ -1,69 +1,28 @@
-import Redis from 'ioredis';
-import fs from 'fs/promises';
-import path from 'path';
-
-const DATA_FILE_PATH = path.join(process.cwd(), 'data', 'contact.json');
-
+import { readContent, writeContent } from "./content-store";
 export interface ContactInfo {
-    phone: string;
-    email: string;
-    fax: string;
-    address: string;
-    transport?: string;
-    mapMessage?: string;
+  email: string;
+  address: string;
+  transport?: string;
+  mapMessage?: string;
 }
-
-let globalWithRedis = global as typeof globalThis & {
-  _redisClientContact?: Redis;
-};
-
-async function getRedisClient() {
-    if (!process.env.REDIS_URL) {
-        throw new Error('REDIS_URL 환경 변수가 누락되었습니다.\nVercel 환경 변수에 REDIS_URL을 등록해주세요.');
-    }
-
-    if (!globalWithRedis._redisClientContact) {
-        const client = new Redis(process.env.REDIS_URL);
-        client.on('error', (err) => console.error('Redis Client Error', err));
-        globalWithRedis._redisClientContact = client;
-    }
-    
-    return globalWithRedis._redisClientContact;
+function clean(data: ContactInfo): ContactInfo {
+  return {
+    email: data.email || "hello@junsemi.co.kr",
+    address: data.address || "",
+    transport: data.transport,
+    mapMessage: data.mapMessage,
+  };
 }
-
-export async function getContactInfo(): Promise<ContactInfo> {
-    try {
-        if (process.env.REDIS_URL) {
-            const client = await getRedisClient();
-            const dataStr = await client.get('contact_info');
-            if (dataStr) {
-                const cached = JSON.parse(dataStr) as ContactInfo;
-                if (cached && Object.keys(cached).length > 0) {
-                    return cached;
-                }
-            }
-        }
-    } catch (e) {
-        console.warn('Redis 데이터를 읽는 중 문제가 발생했거나 연결 실패:', e);
-    }
-
-    try {
-        const fileContent = await fs.readFile(DATA_FILE_PATH, 'utf-8');
-        return JSON.parse(fileContent) as ContactInfo;
-    } catch {
-        // Return default if file missing
-        return {
-            phone: "010-0000-0000",
-            email: "contact@example.com",
-            fax: "000-000-0000",
-            address: "주소를 입력해주세요.",
-            transport: "대중교통 정보를 입력해주세요.",
-            mapMessage: "지도 준비 중"
-        };
-    }
+export async function getContactInfo() {
+  return clean(
+    await readContent<ContactInfo>("contact_info", "contact.json", {
+      email: "hello@junsemi.co.kr",
+      address: "",
+    }),
+  );
 }
-
-export async function updateContactInfo(data: ContactInfo): Promise<void> {
-    const client = await getRedisClient();
-    await client.set('contact_info', JSON.stringify(data));
+export async function updateContactInfo(data: ContactInfo) {
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email))
+    throw new Error("이메일 주소를 확인해 주세요.");
+  await writeContent("contact_info", clean(data));
 }

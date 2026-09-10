@@ -1,28 +1,30 @@
-'use server';
-
-import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
-import { getAdminPassword } from '@/lib/admin-config-db';
-
-const FALLBACK_ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '0901'; // Default password for demo
-
+"use server";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import { adminPassword, signingSecret } from "@/lib/admin-session";
+import { issueSession, passwordMatches } from "@/lib/session-token";
 export async function loginAction(password: string) {
-    const dbPassword = await getAdminPassword();
-    const validPassword = dbPassword || FALLBACK_ADMIN_PASSWORD;
-
-    if (password === validPassword) {
-        (await cookies()).set('admin_session', 'true', {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            maxAge: 60 * 60 * 24, // 1 day
-            path: '/',
-        });
-        redirect('/admin');
-    }
+  const expected = await adminPassword();
+  if (
+    typeof password !== "string" ||
+    password.length > 1024 ||
+    !passwordMatches(password, expected)
+  )
     return false;
+  (await cookies()).set(
+    "admin_session",
+    issueSession(signingSecret(expected)),
+    {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 86400,
+      path: "/",
+    },
+  );
+  return true;
 }
-
 export async function logoutAction() {
-    (await cookies()).delete('admin_session');
-    redirect('/admin/login');
+  (await cookies()).delete("admin_session");
+  redirect("/admin/login");
 }

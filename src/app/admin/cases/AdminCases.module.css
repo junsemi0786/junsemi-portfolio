@@ -6,17 +6,20 @@
 
 .header {
     display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 2rem;
 }
 
 .tableContainer {
-    overflow: hidden;
+    overflow-x: auto;
     padding: 0;
 }
 
 .table {
+    min-width: 680px;
     width: 100%;
     border-collapse: collapse;
     color: white;

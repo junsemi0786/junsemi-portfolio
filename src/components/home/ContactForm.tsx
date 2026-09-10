@@ -1,108 +1,143 @@
-'use client';
-
-import { useState, FormEvent } from 'react';
-import Button from '@/components/ui/Button';
-import styles from './ContactForm.module.css';
-import { submitInquiry } from '@/app/actions/email';
-
-export default function ContactForm() {
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [isSubmitted, setIsSubmitted] = useState(false);
-    const [submitError, setSubmitError] = useState<string | null>(null);
-
-    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        setIsSubmitting(true);
-        setSubmitError(null);
-
-        const formData = new FormData(e.currentTarget);
-
-        try {
-            const result = await submitInquiry(formData);
-            if (result.success) {
-                setIsSubmitted(true);
-            } else {
-                setSubmitError(result.message || '오류가 발생했습니다.');
-            }
-        } catch {
-            setSubmitError('네트워크 오류가 발생했습니다.');
-        } finally {
-            setIsSubmitting(false);
-        }
-    };
-
-    if (isSubmitted) {
-        return (
-            <div className={styles.successMessage}>
-                <div className={styles.checkIcon}>✓</div>
-                <h3>견적 요청이 접수되었습니다!</h3>
-                <p>담당 엔지니어가 검토 후 24시간 이내에<br />입력하신 연락처로 회신 드리겠습니다.</p>
-                <Button onClick={() => setIsSubmitted(false)} variant="outline">
-                    추가 문의하기
-                </Button>
-            </div>
-        );
-    }
-
-    return (
-        <form className={styles.form} onSubmit={handleSubmit}>
-            <h3 className={styles.formTitle}>견적 및 긴급 지원 요청</h3>
-
-            <div className={styles.grid}>
-                <div className={styles.field}>
-                    <label htmlFor="company">회사/기관명 <span className={styles.required}>*</span></label>
-                    <input type="text" id="company" name="company" required placeholder="예: 한국반도체, 부천시청" />
-                </div>
-
-                <div className={styles.field}>
-                    <label htmlFor="name">담당자 성함 <span className={styles.required}>*</span></label>
-                    <input type="text" id="name" name="name" required placeholder="홍길동 과장" />
-                </div>
-
-                <div className={styles.field}>
-                    <label htmlFor="phone">연락처 <span className={styles.required}>*</span></label>
-                    <input type="tel" id="phone" name="phone" required placeholder="010-0000-0000" />
-                </div>
-
-                <div className={styles.field}>
-                    <label htmlFor="email">이메일</label>
-                    <input type="email" id="email" name="email" placeholder="email@company.com" />
-                </div>
-            </div>
-
-            <div className={styles.field}>
-                <label htmlFor="type">문의 유형</label>
-                <select id="type" name="type">
-                    <option value="retrofit">장비 리퍼비시/개조</option>
-                    <option value="scada">SCADA/HMI 구축</option>
-                    <option value="plc">PLC 자동화 제어</option>
-                    <option value="repair">긴급 수리/유지보수</option>
-                    <option value="other">기타 기술 문의</option>
-                </select>
-            </div>
-
-            <div className={styles.field}>
-                <label htmlFor="message">상세 내용 <span className={styles.required}>*</span></label>
-                <textarea
-                    id="message"
-                    name="message"
-                    required
-                    rows={5}
-                    placeholder="현재 발생한 문제점이나 필요하신 사양을 자세히 적어주시면 정확한 견적이 가능합니다."
-                ></textarea>
-            </div>
-
-            {submitError && (
-                <div style={{ color: 'red', marginBottom: '1rem', textAlign: 'center' }}>
-                    {submitError}
-                </div>
-            )}
-
-            <div className={styles.submitWrapper}>
-                <Button type="submit" fullWidth disabled={isSubmitting}>
-                    {isSubmitting ? '전송 중...' : '견적 요청하기'}
-                </Button>
-            </div>
-        </form>
+"use client";
+import { useState } from "react";
+export default function ContactForm({
+  email = "hello@junsemi.co.kr",
+  service,
+}: {
+  email?: string;
+  service?: string;
+}) {
+  const [draft, setDraft] = useState("");
+  const [subject, setSubject] = useState("");
+  const [notice, setNotice] = useState("");
+  function prepare(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const data = new FormData(e.currentTarget);
+    setSubject(`[기술 문의] ${data.get("type")} · ${data.get("company")}`);
+    setDraft(
+      `회사/사업장: ${data.get("company")}\n담당자: ${data.get("name")}\n회신 이메일: ${data.get("email")}\n분야: ${data.get("type")}\n\n장비 모델·증상·희망 일정\n${data.get("message")}`,
     );
+    setNotice(
+      "초안을 만들었습니다. 아래에서 메일 앱을 열거나 내용을 복사한 뒤 이메일을 직접 보내주세요.",
+    );
+  }
+  async function copy() {
+    try {
+      await navigator.clipboard.writeText(
+        `받는 사람: ${email}\n제목: ${subject}\n\n${draft}`,
+      );
+      setNotice(
+        "문의 내용을 복사했습니다. 사용하시는 이메일에서 붙여넣고 보내주세요.",
+      );
+    } catch {
+      setNotice("아래 초안을 직접 선택해 복사해 주세요.");
+    }
+  }
+  return (
+    <form
+      className="contact-form"
+      onSubmit={prepare}
+      onChange={() => {
+        setDraft("");
+        setNotice("");
+      }}
+    >
+      <div className="form-row">
+        <label>
+          회사·사업장명 *
+          <input
+            name="company"
+            required
+            maxLength={100}
+            autoComplete="organization"
+          />
+        </label>
+        <label>
+          담당자명 *
+          <input name="name" required maxLength={80} autoComplete="name" />
+        </label>
+      </div>
+      <label>
+        회신받을 이메일 *
+        <input
+          name="email"
+          type="email"
+          required
+          maxLength={200}
+          autoComplete="email"
+        />
+      </label>
+      <label>
+        문의 분야
+        <select
+          name="type"
+          defaultValue={
+            (
+              {
+                semiconductor: "반도체 장비 개조·수명연장",
+                automation: "산업 자동제어 예방진단",
+                plc: "PLC·HMI 개선",
+                scada: "CIMON SCADA",
+              } as Record<string, string>
+            )[service || ""] || "반도체 장비 개조·수명연장"
+          }
+        >
+          <option>반도체 장비 개조·수명연장</option>
+          <option>산업 자동제어 예방진단</option>
+          <option>PLC·HMI 개선</option>
+          <option>CIMON SCADA</option>
+          <option>기술 협업·기타</option>
+        </select>
+      </label>
+      <label>
+        장비 모델·현재 증상·희망 일정 *
+        <textarea
+          name="message"
+          required
+          rows={7}
+          maxLength={4000}
+          placeholder="예: LS PLC와 연결된 화면에 통신 오류가 반복됩니다. 모델명과 오류 화면을 첨부할 수 있습니다."
+        />
+      </label>
+      <small>
+        이 양식은 브라우저에서 이메일 초안만 만듭니다. 첨부 사진과 자료는
+        사용하시는 이메일에서 추가해 주세요.
+      </small>
+      <button type="submit" className="btn-primary">
+        이메일 초안 만들기
+      </button>
+      <p role="status" aria-live="polite">
+        {notice}
+      </p>
+      {draft && (
+        <div className="notice">
+          <p>
+            <strong>받는 사람: {email}</strong>
+          </p>
+          <label>
+            문의 초안
+            <textarea
+              readOnly
+              value={`제목: ${subject}\n\n${draft}`}
+              rows={10}
+            />
+          </label>
+          <div className="actions">
+            <a
+              className="btn-primary"
+              href={`mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(draft)}`}
+            >
+              메일 앱 열기 ↗
+            </a>
+            <button type="button" className="btn-secondary" onClick={copy}>
+              내용 복사
+            </button>
+          </div>
+          <p className="muted">
+            아직 전송되지 않았습니다. 이메일에서 보내기를 완료해 주세요.
+          </p>
+        </div>
+      )}
+    </form>
+  );
 }

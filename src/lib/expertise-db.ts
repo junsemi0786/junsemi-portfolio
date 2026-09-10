@@ -1,108 +1,59 @@
-import Redis from 'ioredis';
-import fs from 'fs/promises';
-import path from 'path';
-import { TechnicalExpertise, ExpertiseFormData } from '@/types/expertise';
-
-const DATA_FILE_PATH = path.join(process.cwd(), 'data', 'expertise.json');
-
-// 전역 클라이언트 캐싱 (핫 리로드 시 다중 연결 방지)
-let globalWithRedis = global as typeof globalThis & {
-  _redisClientExpertise?: Redis;
-};
-
-async function getRedisClient() {
-    if (!process.env.REDIS_URL) {
-        throw new Error('REDIS_URL 환경 변수가 누락되었습니다. Vercel 환경 변수에 REDIS_URL을 등록해주세요.');
-    }
-
-    if (!globalWithRedis._redisClientExpertise) {
-        const client = new Redis(process.env.REDIS_URL);
-        client.on('error', (err) => console.error('Redis Client Error', err));
-        globalWithRedis._redisClientExpertise = client;
-    }
-    
-    return globalWithRedis._redisClientExpertise;
-}
-
+import { TechnicalExpertise, ExpertiseFormData } from "@/types/expertise";
+import { readContent, writeContent } from "./content-store";
+import { cleanExpertiseDescription } from "./content-text";
+const KEY = "expertise_data";
 export async function getExpertiseList(): Promise<TechnicalExpertise[]> {
-    try {
-        if (process.env.REDIS_URL) {
-            const client = await getRedisClient();
-            const dataStr = await client.get('expertise_data');
-            
-            if (dataStr) {
-                const cached = JSON.parse(dataStr) as TechnicalExpertise[];
-                // 빈 배열이어도 Redis에 데이터가 있는 것이므로 반환 (폴백 방지)
-                if (Array.isArray(cached)) {
-                    return cached.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
-                }
-            }
-        }
-    } catch (e) {
-        console.warn('Redis 데이터를 읽는 중 문제가 발생했거나 연결 실패:', e);
-    }
-
-    // Fallback: 파일에서 데이터 로드
-    try {
-        const fileContent = await fs.readFile(DATA_FILE_PATH, 'utf-8');
-        const list = JSON.parse(fileContent) as TechnicalExpertise[];
-        const normalized = list.map(item => ({
-            ...item,
-            order: typeof item.order === 'number' ? item.order : 0,
-            keywords: Array.isArray(item.keywords) ? item.keywords : [],
-            features: Array.isArray(item.features) ? item.features : [],
-        }));
-        return normalized.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
-    } catch (error) {
-        console.error('Failed to parse or read expertise.json', error);
-        return [];
-    }
+  const data = await readContent<TechnicalExpertise[]>(
+    KEY,
+    "expertise.json",
+    [],
+  );
+  return data
+    .map((i) => ({
+      ...i,
+      description: cleanExpertiseDescription(i.description),
+      order: i.order ?? 0,
+      keywords: i.keywords ?? [],
+      features: i.features ?? [],
+    }))
+    .sort((a, b) => a.order - b.order);
 }
-
-export async function getExpertiseById(id: string): Promise<TechnicalExpertise | undefined> {
-    const list = await getExpertiseList();
-    return list.find((item) => item.id === id);
+export async function getExpertiseById(id: string) {
+  return (await getExpertiseList()).find((i) => i.id === id);
 }
-
-export async function createExpertise(data: ExpertiseFormData): Promise<TechnicalExpertise> {
-    const client = await getRedisClient(); // REDIS_URL 없으면 에러 던짐
-    const list = await getExpertiseList();
-    const newItem: TechnicalExpertise = {
-        ...data,
-        id: data.id || crypto.randomUUID(),
-        updatedAt: new Date().toISOString(),
-    };
-
-    list.push(newItem);
-    await client.set('expertise_data', JSON.stringify(list));
-    return newItem;
+export async function createExpertise(data: ExpertiseFormData) {
+  const list = await getExpertiseList();
+  const item = {
+    ...data,
+    id: data.id || crypto.randomUUID(),
+    updatedAt: new Date().toISOString(),
+  };
+  if (list.some((i) => i.id === item.id))
+    throw new Error("이미 사용 중인 주소입니다.");
+  await writeContent(KEY, [...list, item]);
+  return item;
 }
-
-export async function updateExpertise(id: string, data: Partial<ExpertiseFormData>): Promise<TechnicalExpertise | null> {
-    const client = await getRedisClient();
-    const list = await getExpertiseList();
-    const index = list.findIndex((item) => item.id === id);
-    if (index === -1) return null;
-
-    const updatedItem = {
-        ...list[index],
-        ...data,
-        updatedAt: new Date().toISOString(),
-    };
-    list[index] = updatedItem;
-    
-    await client.set('expertise_data', JSON.stringify(list));
-    return updatedItem;
+export async function updateExpertise(
+  id: string,
+  data: Partial<ExpertiseFormData>,
+) {
+  const list = await getExpertiseList();
+  const index = list.findIndex((i) => i.id === id);
+  if (index < 0) return null;
+  const item = {
+    ...list[index],
+    ...data,
+    id,
+    updatedAt: new Date().toISOString(),
+  };
+  list[index] = item;
+  await writeContent(KEY, list);
+  return item;
 }
-
-export async function deleteExpertise(id: string): Promise<boolean> {
-    const client = await getRedisClient();
-    let list = await getExpertiseList();
-    const initialLength = list.length;
-    list = list.filter((item) => item.id !== id);
-
-    if (list.length === initialLength) return false;
-    
-    await client.set('expertise_data', JSON.stringify(list));
-    return true;
+export async function deleteExpertise(id: string) {
+  const list = await getExpertiseList();
+  const rest = list.filter((i) => i.id !== id);
+  if (rest.length === list.length) return false;
+  await writeContent(KEY, rest);
+  return true;
 }

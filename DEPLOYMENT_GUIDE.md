@@ -1,3 +1,5 @@
+> 이번 리뉴얼의 최신 배포·Redis·검색 설정은 [RENEWAL_GUIDE.md](RENEWAL_GUIDE.md)를 먼저 확인하세요. 아래는 기존 최초 구축 안내입니다. 이미 연결된 도메인과 메일 DNS를 다시 설정할 필요가 없습니다.
+
 # Deployment Guide: Next.js on Vercel
 
 Since you are using **Next.js**, the best and easiest platform for deployment is **Vercel** (the creators of Next.js). It supports custom domains and offers excellent performance.
@@ -23,7 +25,7 @@ Since you are using **Next.js**, the best and easiest platform for deployment is
     - **Framework Preset**: Next.js (Default)
     - **Root Directory**: `./` (Default)
     - **Environment Variables**:
-        - Add `ADMIN_PASSWORD` and set your desired password (e.g., `0901`).
+        - Add `ADMIN_PASSWORD` and set your desired password (use a private, strong password).
 4.  Click **"Deploy"**. Vercel will build and deploy your site.
 
 ## 4. Connect Custom Domain (Important for Workspace Users)

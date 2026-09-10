@@ -1,47 +1,70 @@
-'use client';
-
-import Link from 'next/link';
-import Image from 'next/image';
-import styles from './Header.module.css';
-import { useLanguage } from '@/contexts/LanguageContext';
-import { t, tx } from '@/lib/translations';
-
+"use client";
+import { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
 export default function Header() {
-    const { language, toggleLanguage } = useLanguage();
-
-    return (
-        <header className={`${styles.header} glass-panel`}>
-            <div className={`container ${styles.container}`}>
-                <Link href="/" className={styles.logoWrapper}>
-                    <Image
-                        src="/images/logo_v2.png"
-                        alt="JunSemi"
-                        width={150}
-                        height={40}
-                        style={{ objectFit: 'contain', height: 'auto' }}
-                        priority
-                    />
-                </Link>
-                <nav className={styles.nav}>
-                    <ul className={styles.navList}>
-                        <li><Link href="/expertise" className={styles.navLink}>{tx(t.nav.expertise, language)}</Link></li>
-                        <li><Link href="/cases" className={styles.navLink}>{tx(t.nav.cases, language)}</Link></li>
-                        <li><Link href="/admin" className={styles.navLink} style={{ color: '#888', fontSize: '0.8rem' }}>[Admin]</Link></li>
-                        <li><Link href="/contact" className={`btn-primary ${styles.contactBtn}`}>{tx(t.nav.contact, language)}</Link></li>
-                        <li>
-                            <button
-                                onClick={toggleLanguage}
-                                className={styles.langToggle}
-                                title={language === 'ko' ? 'Switch to English' : '한국어로 전환'}
-                            >
-                                <span className={language === 'ko' ? styles.langActive : styles.langInactive}>KO</span>
-                                <span className={styles.langDivider}>|</span>
-                                <span className={language === 'en' ? styles.langActive : styles.langInactive}>EN</span>
-                            </button>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </header>
-    );
+  const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const items = [
+    ["/expertise", "기술 서비스"],
+    ["/cases", "프로젝트"],
+    ["/support", "문제 해결 가이드"],
+    ["/partner", "기술 협업"],
+  ];
+  return (
+    <header className="site-header">
+      <a className="skip-link" href="#main-content">
+        본문으로 건너뛰기
+      </a>
+      <div className="container header-inner">
+        <Link
+          href="/"
+          className="brand"
+          onClick={() => setOpen(false)}
+          aria-label="JUNgenius 제이유엔지니어스 홈"
+        >
+          <Image
+            src="/images/logo_v2.png"
+            alt="JUNgenius"
+            width={184}
+            height={48}
+            priority
+          />
+          <span>제이유엔지니어스</span>
+        </Link>
+        <button
+          className="menu-toggle"
+          aria-expanded={open}
+          aria-controls="site-navigation"
+          onClick={() => setOpen(!open)}
+        >
+          {open ? "메뉴 닫기" : "메뉴 열기"}
+        </button>
+        <nav
+          id="site-navigation"
+          className={open ? "site-nav open" : "site-nav"}
+          aria-label="주 메뉴"
+        >
+          {items.map(([href, label]) => (
+            <Link
+              href={href}
+              key={href}
+              aria-current={pathname.startsWith(href) ? "page" : undefined}
+              onClick={() => setOpen(false)}
+            >
+              {label}
+            </Link>
+          ))}
+          <Link
+            href="/contact"
+            className="btn-primary"
+            onClick={() => setOpen(false)}
+          >
+            이메일 문의 ↗
+          </Link>
+        </nav>
+      </div>
+    </header>
+  );
 }
