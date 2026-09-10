@@ -56,3 +56,7 @@ python3 tests/site_smoke.py http://127.0.0.1:3001 --indexable
 운영 배포 후 사이트 소유 계정으로 네이버 서치어드바이저와 Google Search Console에 사이트를 확인하고 `https://junsemi.co.kr/sitemap.xml`을 제출합니다. 네이버에는 `https://junsemi.co.kr/rss.xml`도 제출할 수 있습니다. 소유 확인용 메타 태그 값은 Vercel의 `NAVER_SITE_VERIFICATION`, `GOOGLE_SITE_VERIFICATION`에 각각 넣고 다시 배포하면 적용됩니다. 검색 순위나 즉시 색인은 보장되지 않습니다. [네이버 공식 제출 안내](https://searchadvisor.naver.com/guide/request-feed), [Google 공식 사이트맵 안내](https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap).
 
 이번 작업에서는 운영 배포, 운영 Redis 변경, 검색 서비스 소유 확인·제출을 실행하지 않았습니다.
+
+## 방문자 카운터
+
+하단의 누적 방문 카운터는 기존 Visitor Badge 서비스를 사용합니다. 운영 집계 키 `https://junsemi.co.kr`를 유지하고, 미리보기는 별도 키로 집계합니다. 수치는 외부 서비스의 집계 방식과 가용성에 따르며, 서비스 연결 실패 시 안내 문구를 표시합니다.

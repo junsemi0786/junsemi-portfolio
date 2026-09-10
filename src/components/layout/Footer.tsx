@@ -1,6 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { getContactInfo } from "@/lib/contact-db";
+import { isProductionSite } from "@/lib/site";
+import VisitorCounter from "./VisitorCounter";
 export default async function Footer() {
   const info = await getContactInfo();
   return (
@@ -35,7 +37,8 @@ export default async function Footer() {
         </nav>
       </div>
       <div className="container footer-bottom">
-        © {new Date().getFullYear()} JUNgenius. 제이유엔지니어스
+        <span>© {new Date().getFullYear()} JUNgenius. 제이유엔지니어스</span>
+        <VisitorCounter preview={!isProductionSite} />
       </div>
     </footer>
   );

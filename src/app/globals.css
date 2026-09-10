@@ -537,11 +537,28 @@ select {
   gap: 10px;
 }
 .footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
   margin-top: 40px;
   padding-block: 22px;
   border-top: 1px solid #454a4f;
   color: #a7acb0;
   font-size: 12px;
+}
+.visitor-counter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  min-height: 22px;
+}
+.visitor-counter img {
+  display: block;
+  height: 22px;
+  width: auto;
 }
 .empty-state {
   padding: 40px;
