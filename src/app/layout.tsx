@@ -16,9 +16,11 @@ export const metadata: Metadata = {
   robots: { index: isProductionSite, follow: isProductionSite },
   verification: {
     google: process.env.GOOGLE_SITE_VERIFICATION,
-    other: process.env.NAVER_SITE_VERIFICATION
-      ? { "naver-site-verification": process.env.NAVER_SITE_VERIFICATION }
-      : {},
+    other: {
+      "naver-site-verification":
+        process.env.NAVER_SITE_VERIFICATION ||
+        "249757994ea08c5b834a9cfd5fdeec2248786ab2",
+    },
   },
 };
 export default function RootLayout({
