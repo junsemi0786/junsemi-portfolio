@@ -13,6 +13,13 @@ interface CaseFormProps {
   isEditing?: boolean;
 }
 
+function parseGalleryPaths(value: string) {
+  return value
+    .split(/[,\n]/)
+    .map((path) => path.trim())
+    .filter(Boolean);
+}
+
 export default function CaseForm({
   initialData,
   onSubmit,
@@ -34,6 +41,9 @@ export default function CaseForm({
   });
 
   const [tagInput, setTagInput] = useState("");
+  const [galleryInput, setGalleryInput] = useState(
+    initialData?.gallery?.join(", ") || "",
+  );
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -74,7 +84,10 @@ export default function CaseForm({
     const toastId = toast.loading("저장 중...");
 
     try {
-      const res = await onSubmit(formData);
+      const res = await onSubmit({
+        ...formData,
+        gallery: parseGalleryPaths(galleryInput),
+      });
       if (res && res.error) {
         toast.error(res.error, { id: toastId });
         setLoading(false);
@@ -230,27 +243,21 @@ export default function CaseForm({
           htmlFor="case-gallery"
           style={{ display: "block", marginBottom: "0.5rem", fontWeight: 600 }}
         >
-          갤러리 이미지 (선택, 쉼표로 구분)
+          갤러리 이미지 (선택, 쉼표 또는 줄바꿈으로 구분)
         </label>
         <p
           style={{ fontSize: "0.8rem", color: "#aaa", marginBottom: "0.5rem" }}
         >
-          상세 페이지 하단에 보여질 추가 이미지들의 경로를 쉼표(,)로 구분하여
-          입력하세요.
+          여러 사진의 경로를 쉼표(,) 또는 줄바꿈으로 구분하세요. 입력한 쉼표와
+          줄바꿈은 저장할 때 사진 경로 목록으로 변환됩니다.
         </p>
-        <input
-          type="text"
+        <textarea
           name="gallery"
           id="case-gallery"
-          value={formData.gallery?.join(", ") || ""}
-          onChange={(e) => {
-            const paths = e.target.value
-              .split(",")
-              .map((s) => s.trim())
-              .filter((s) => s !== "");
-            setFormData((prev) => ({ ...prev, gallery: paths }));
-          }}
-          placeholder="/images/detail1.jpg, /images/detail2.jpg"
+          value={galleryInput}
+          onChange={(e) => setGalleryInput(e.target.value)}
+          placeholder={"/images/detail1.jpg, /images/detail2.jpg\n/images/detail3.png"}
+          rows={3}
           style={{
             width: "100%",
             padding: "10px",
@@ -258,6 +265,7 @@ export default function CaseForm({
             border: "1px solid #444",
             background: "#222",
             color: "white",
+            resize: "vertical",
           }}
         />
       </div>
