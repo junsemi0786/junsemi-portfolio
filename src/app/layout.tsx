@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { LanguageProvider } from "@/contexts/LanguageContext";
@@ -23,17 +24,18 @@ export const metadata: Metadata = {
     },
   },
 };
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const locale = (await headers()).get("x-site-locale") === "en" ? "en" : "ko";
   return (
-    <html lang="ko">
+    <html lang={locale}>
       <body>
         <LanguageProvider>
           <ToastProvider />
           <Header />
           <main id="main-content">{children}</main>
-          <Footer />
+          <Footer locale={locale} />
         </LanguageProvider>
         <script
           type="application/ld+json"

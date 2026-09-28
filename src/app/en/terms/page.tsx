@@ -1,0 +1,3 @@
+import { englishPageMetadata } from "@/lib/site";
+export const metadata = englishPageMetadata("Website Terms", "Terms for using the JUNgenius engineering website.", "/en/terms");
+export default function EnglishTerms() { return <section className="section container prose"><p className="eyebrow">Terms</p><h1>Website Terms</h1><p>The information on this website describes general engineering capabilities and completed project examples. It is not a binding quotation, guarantee or technical instruction for a specific site.</p><p>Work scope, schedule, price, responsibilities and deliverables are agreed separately after the equipment condition and available information are reviewed.</p></section>; }

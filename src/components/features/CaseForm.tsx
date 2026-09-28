@@ -36,6 +36,11 @@ export default function CaseForm({
     summary: initialData?.summary || "",
     description: initialData?.description || "",
     outcome: initialData?.outcome || "",
+    projectNameEn: initialData?.projectNameEn || "",
+    clientNameEn: initialData?.clientNameEn || "",
+    summaryEn: initialData?.summaryEn || "",
+    descriptionEn: initialData?.descriptionEn || "",
+    outcomeEn: initialData?.outcomeEn || "",
     status: initialData?.status || "draft",
     order: initialData?.order || 0,
   });
@@ -407,6 +412,57 @@ export default function CaseForm({
           }}
         />
       </div>
+
+      <fieldset
+        style={{
+          border: "1px solid #555",
+          padding: "1.25rem",
+          marginBottom: "1.5rem",
+        }}
+      >
+        <legend style={{ padding: "0 0.5rem", fontWeight: 700 }}>
+          영문 페이지 내용 (선택)
+        </legend>
+        <p style={{ color: "#aaa", marginBottom: "1rem" }}>
+          입력하면 영문 사이트와 영문 검색 결과에 사용됩니다. 비워두면 등록된
+          기본 영문 설명 또는 한국어 제목이 표시됩니다.
+        </p>
+        {[
+          ["projectNameEn", "영문 프로젝트명", formData.projectNameEn],
+          ["clientNameEn", "영문 고객·사업장명", formData.clientNameEn],
+          ["outcomeEn", "영문 작업 결과", formData.outcomeEn],
+        ].map(([name, label, value]) => (
+          <label key={name} style={{ display: "grid", gap: 6, marginBottom: 14 }}>
+            {label}
+            <input
+              type="text"
+              name={name}
+              value={value}
+              onChange={handleChange}
+              style={{ width: "100%" }}
+            />
+          </label>
+        ))}
+        <label style={{ display: "grid", gap: 6, marginBottom: 14 }}>
+          영문 요약
+          <textarea
+            name="summaryEn"
+            value={formData.summaryEn}
+            onChange={handleChange}
+            rows={3}
+          />
+        </label>
+        <label style={{ display: "grid", gap: 6 }}>
+          영문 상세 작업 내용 (## 제목, 줄바꿈 지원)
+          <textarea
+            name="descriptionEn"
+            value={formData.descriptionEn}
+            onChange={handleChange}
+            rows={10}
+            placeholder={"## Site Requirement\nDescribe the issue.\n\n## Work Performed\nDescribe the completed work."}
+          />
+        </label>
+      </fieldset>
 
       <div
         className="grid-2"

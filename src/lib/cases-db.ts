@@ -33,7 +33,10 @@ function validate(data: CaseStudyFormData) {
   if (
     data.projectName.length > 200 ||
     data.summary.length > 600 ||
-    data.description.length > 30000
+    data.description.length > 30000 ||
+    (data.projectNameEn?.length || 0) > 200 ||
+    (data.summaryEn?.length || 0) > 600 ||
+    (data.descriptionEn?.length || 0) > 30000
   )
     throw new Error("입력 내용이 너무 깁니다.");
   if (!["draft", "published"].includes(data.status))

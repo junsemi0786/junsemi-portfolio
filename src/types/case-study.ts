@@ -11,6 +11,11 @@ export interface CaseStudy {
     summary: string; // Short description for list view
     description: string; // Full Markdown content for detail view
     outcome?: string; // e.g., "Increased efficiency by 200%"
+    projectNameEn?: string;
+    clientNameEn?: string;
+    summaryEn?: string;
+    descriptionEn?: string;
+    outcomeEn?: string;
     status: CaseStatus;
     order: number; // For sorting
     createdAt: string; // ISO Date string

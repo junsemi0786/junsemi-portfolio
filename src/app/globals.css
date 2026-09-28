@@ -177,6 +177,20 @@ select {
 .site-nav [aria-current="page"] {
   color: #ff985f;
 }
+.language-switch {
+  min-width: 42px;
+  padding: 7px 11px;
+  border: 1px solid #737980;
+  border-radius: 4px;
+  text-align: center;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #f2f1ed;
+}
+.language-switch:hover {
+  border-color: #ff985f;
+  color: #ff985f;
+}
 .menu-toggle {
   display: none;
   color: #eee;

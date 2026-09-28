@@ -6,26 +6,31 @@ import type { CaseStudy } from "@/types/case-study";
 export default function ProjectList({
   cases,
   filter = false,
+  locale = "ko",
 }: {
   cases: Pick<
     CaseStudy,
     "id" | "projectName" | "period" | "summary" | "tags" | "thumbnailUrl"
   >[];
   filter?: boolean;
+  locale?: "ko" | "en";
 }) {
-  const [category, setCategory] = useState("전체");
+  const en = locale === "en";
+  const all = en ? "All" : "전체";
+  const automation = en ? "SCADA & Automation" : "SCADA·자동제어";
+  const [category, setCategory] = useState(all);
   const shown = cases.filter(
     (c) =>
-      category === "전체" ||
-      (category === "SCADA·자동제어"
+      category === all ||
+      (category === automation
         ? /SCADA|정수장|CCSS/i.test(c.projectName + " " + c.tags.join(" "))
         : !/SCADA|정수장|CCSS/i.test(c.projectName + " " + c.tags.join(" "))),
   );
   return (
     <>
       {filter && (
-        <div className="filters" aria-label="프로젝트 분야">
-          {["전체", "반도체 장비", "SCADA·자동제어"].map((t) => (
+        <div className="filters" aria-label={en ? "Project category" : "프로젝트 분야"}>
+          {[all, en ? "Semiconductor Equipment" : "반도체 장비", automation].map((t) => (
             <button
               key={t}
               aria-pressed={category === t}
@@ -41,7 +46,7 @@ export default function ProjectList({
           <article className="card" key={c.id}>
             {c.thumbnailUrl && (
               <Link
-                href={`/cases/${c.id}`}
+                href={`${en ? "/en" : ""}/cases/${c.id}`}
                 className="case-image"
                 style={{ display: "block" }}
                 tabIndex={-1}
@@ -58,7 +63,7 @@ export default function ProjectList({
             <div className="card-body">
               <span className="eyebrow">{c.period}</span>
               <h3>
-                <Link href={`/cases/${c.id}`}>{c.projectName}</Link>
+                <Link href={`${en ? "/en" : ""}/cases/${c.id}`}>{c.projectName}</Link>
               </h3>
               <p>{c.summary}</p>
               <div className="tags">
@@ -68,8 +73,8 @@ export default function ProjectList({
                   </span>
                 ))}
               </div>
-              <Link className="card-link" href={`/cases/${c.id}`}>
-                작업 내용 보기 →
+              <Link className="card-link" href={`${en ? "/en" : ""}/cases/${c.id}`}>
+                {en ? "View case study →" : "작업 내용 보기 →"}
               </Link>
             </div>
           </article>
@@ -77,8 +82,9 @@ export default function ProjectList({
       </div>
       {shown.length === 0 && (
         <p className="empty-state">
-          공개된 프로젝트를 준비하고 있습니다. 필요한 작업은 이메일로 문의해
-          주세요.
+          {en
+            ? "English case studies are being prepared. Please email us about your equipment or control-system requirements."
+            : "공개된 프로젝트를 준비하고 있습니다. 필요한 작업은 이메일로 문의해 주세요."}
         </p>
       )}
     </>

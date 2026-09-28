@@ -1,0 +1,3 @@
+import { englishPageMetadata } from "@/lib/site";
+export const metadata = englishPageMetadata("Privacy Notice", "Privacy notice for technical inquiries submitted to JUNgenius.", "/en/privacy");
+export default function EnglishPrivacy() { return <section className="section container prose"><p className="eyebrow">Privacy</p><h1>Privacy Notice</h1><h2>Information used for inquiries</h2><p>The email draft form operates in your browser. JUNgenius receives information only after you send the email through your email service.</p><h2>Purpose</h2><p>Information you send is used to review your technical inquiry, define a possible work scope and communicate about the request.</p><h2>Contact</h2><p>Questions may be sent to hello@junsemi.co.kr.</p></section>; }
