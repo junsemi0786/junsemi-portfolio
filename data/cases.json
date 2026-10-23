@@ -106,22 +106,31 @@
     "updatedAt": "2026-02-14T05:12:37.884Z"
   },
   {
-    "clientName": "ONSEMI",
-    "projectName": "Mercury Refurbish & Set-up. Install",
-    "period": "2024.01",
-    "tags": [],
-    "thumbnailUrl": "/images/mercury/m4.jpg",
-    "gallery": [
-      "/images/mercury/m4.jpg"
+    "clientName": "Onsemi",
+    "projectName": "FSI Mercury MP 리퍼비시·설치·프로세스 셋업",
+    "period": "2022.05 - 2023.02",
+    "tags": [
+      "FSI Mercury MP",
+      "WET Process",
+      "Refurbish",
+      "Set-up",
+      "Process Qualification"
     ],
-    "summary": "/images/project-1.jpg",
-    "description": "/images/project-1.jpg",
-    "outcome": "",
-    "status": "draft",
+    "thumbnailUrl": "/images/mercury/m4-public-v2.png",
+    "gallery": [
+      "/images/mercury/m5.jpg",
+      "/images/mercury/m2.jpg",
+      "/images/mercury/m6.jpg",
+      "/images/mercury/m7.jpg"
+    ],
+    "summary": "해외에서 반입되거나 중고로 구입한 FSI Mercury MP 4대의 상태를 현장에서 확인하고, 리퍼비시부터 설치·시운전·프로세스 검증까지 수행했습니다.",
+    "description": "## 프로젝트 배경\nOnsemi가 도입한 노후 FSI Mercury MP 장비를 생산 현장에 적용하기 위해 장비 상태 확인, 복구, 설치와 공정 검증이 필요했습니다. 준세미는 2022년 5월과 8월 네덜란드 장비업체가 공급한 2대, 2022년 9월경 미국 장비업체에서 반입된 1대, 2023년 2월 Onsemi가 구입한 중고 장비 1대의 작업을 수행했습니다.\n## 준세미 수행 범위\n- 현장 장비 상태 점검과 고장 원인 확인\n- 부팅 불량, Flow 관련 이상 등 구형 Mercury 일반 고장 대응\n- 장비 하드웨어 셋업과 유틸리티 연결 상태 확인\n- 현장 설치, 시운전 및 프로세스 셋업\n- Particle test와 Etch rate test 수행\n- APM·SPM 조건 검증과 Recipe 최적화\n## 적용 가능한 개선 작업\n- Helios(Hot System)의 순간 정지 시 Power Off되어 알람 없이 공정이 진행되는 문제 개선: 전원을 분리하고 Controller Power를 UPS에 연결\n- 배기 압력과 Flow를 함께 감지하는 배기 알람\n- Touch Screen 기반 Chemical Supply 이력 기록\n- DI Water Digital Pressure Gauge와 알람 추가\n## 검증 범위\n장비의 단순 전원 투입에 그치지 않고 실제 공정 운전을 위한 Unit Process 검증까지 수행했습니다. 구체적인 교체 부품과 개선 범위는 장비 상태, 보유 도면, 부품 수급 조건 및 고객사 안전 기준을 확인한 뒤 결정합니다.\n## 서비스 원칙\n준세미는 장비 제조사의 공식 서비스 조직이 아닌 독립 현장 기술 서비스 업체입니다. 모든 모델이나 부품 공급을 보장하지 않으며, 사전 점검을 통해 수행 가능 범위와 위험 요소를 먼저 안내합니다.",
+    "outcome": "Onsemi 현장에서 Mercury MP 4대의 리퍼비시·설치·시운전 및 Unit Process 검증을 완료했습니다.",
+    "status": "published",
     "order": 0,
     "id": "66507b67-7a02-449b-abd4-5bca62f45edd",
     "createdAt": "2026-02-14T10:10:41.315Z",
-    "updatedAt": "2026-02-14T12:43:28.294Z"
+    "updatedAt": "2026-10-23T00:00:00.000Z"
   },
   {
     "clientName": "부천까치울정수장",
