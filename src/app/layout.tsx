@@ -42,12 +42,35 @@ export default async function RootLayout({
           dangerouslySetInnerHTML={{
             __html: jsonLd({
               "@context": "https://schema.org",
-              "@type": "Organization",
-              name: BRAND,
-              url: SITE_URL,
-              logo: `${SITE_URL}/images/logo_v2.png`,
-              email: EMAIL,
-              founder: { "@type": "Person", name: "강성준" },
+              "@graph": [
+                {
+                  "@type": "Organization",
+                  "@id": `${SITE_URL}/#organization`,
+                  name: "JUNgenius",
+                  alternateName: ["제이유엔지니어스", BRAND],
+                  url: SITE_URL,
+                  logo: `${SITE_URL}/images/logo_v2.png`,
+                  email: EMAIL,
+                  founder: { "@type": "Person", name: "강성준" },
+                  areaServed: "KR",
+                  knowsAbout: [
+                    "Legacy semiconductor equipment retrofit",
+                    "FSI Mercury MP refurbishment",
+                    "Obsolete PLC replacement",
+                    "CIMON SCADA",
+                    "Industrial control system diagnostics",
+                  ],
+                },
+                {
+                  "@type": "WebSite",
+                  "@id": `${SITE_URL}/#website`,
+                  url: SITE_URL,
+                  name: "JUNgenius",
+                  alternateName: "제이유엔지니어스",
+                  inLanguage: ["ko-KR", "en"],
+                  publisher: { "@id": `${SITE_URL}/#organization` },
+                },
+              ],
             }),
           }}
         />

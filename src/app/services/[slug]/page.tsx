@@ -43,6 +43,8 @@ export default async function Service({
         style={{ paddingTop: 0 }}
       >
         <div className="prose">
+          <h2>기술 검토 방식</h2>
+          <p>{s.overview}</p>
           <h2>이런 상황에서 문의해 주세요</h2>
           <ul>
             {s.problems.map((p) => (
@@ -71,7 +73,17 @@ export default async function Service({
               </p>
             ))}
           <p>
-            <Link href="/cases">관련 현장 프로젝트 확인 →</Link>
+            <Link
+              href={
+                slug === "semiconductor"
+                  ? "/cases/66507b67-7a02-449b-abd4-5bca62f45edd"
+                  : "/cases"
+              }
+            >
+              {slug === "semiconductor"
+                ? "FSI Mercury MP 리퍼비시·설치·프로세스 셋업 사례 →"
+                : "관련 현장 프로젝트 확인 →"}
+            </Link>
           </p>
         </div>
         <aside className="aside-panel">

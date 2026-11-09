@@ -45,20 +45,17 @@ export default function ProjectList({
         {shown.map((c) => (
           <article className="card" key={c.id}>
             {c.thumbnailUrl && (
-              <Link
-                href={`${en ? "/en" : ""}/cases/${c.id}`}
+              <div
                 className="case-image"
                 style={{ display: "block" }}
-                tabIndex={-1}
-                aria-hidden="true"
               >
                 <Image
                   src={c.thumbnailUrl}
-                  alt=""
+                  alt={en ? `${c.projectName} project photo` : `${c.projectName} 프로젝트 사진`}
                   fill
                   sizes="(max-width:740px) 100vw, (max-width:900px) 50vw, 33vw"
                 />
-              </Link>
+              </div>
             )}
             <div className="card-body">
               <span className="eyebrow">{c.period}</span>

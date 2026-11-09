@@ -43,8 +43,8 @@
   },
   {
     "slug": "legacy-plc-replacement",
-    "title": "단종 PLC·터치패널, 교체를 준비할 때 확인할 사항",
-    "desc": "노후 Omron·LS PLC, Proface·EasyView HMI와 단종 제어기 교체·마이그레이션 상담. 원본 프로그램, I/O, 통신과 정지 조건을 먼저 검토합니다.",
+    "title": "단종 PLC 교체·HMI 마이그레이션 전 확인할 사항",
+    "desc": "노후 Omron·LS PLC, Proface·EasyView HMI와 단종 제어기 교체·마이그레이션 안내. 원본 프로그램, I/O, 통신과 정지·복구 조건을 먼저 검토합니다.",
     "service": "plc",
     "sections": [
       [

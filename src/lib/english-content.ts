@@ -3,9 +3,10 @@ import type { CaseStudy } from "@/types/case-study";
 export const englishServices = [
   {
     slug: "semiconductor",
-    title: "Legacy Semiconductor Equipment Retrofit & Life Extension",
+    title: "Legacy Semiconductor Equipment Support, Retrofit & Life Extension",
     eyebrow: "Legacy Equipment Modernization",
-    desc: "Retrofit, refurbishment and control upgrades for aging WET process equipment, including FSI Mercury systems. We assess what can remain in service and what needs replacement.",
+    desc: "Korea-based retrofit, refurbishment and control support for aging WET process equipment, including FSI Mercury systems. We assess what can remain in service and what needs replacement.",
+    overview: "JUNgenius supports legacy semiconductor equipment when the original configuration must remain in production but controls, sensors, utilities or obsolete components need practical improvement. Work can cover condition assessment, troubleshooting, retrofit engineering, commissioning and documented handover.",
     target: "Semiconductor manufacturers and equipment service companies operating aging process equipment",
     problems: [
       "Obsolete parts make repairs and spare-part planning difficult.",
@@ -27,6 +28,7 @@ export const englishServices = [
     eyebrow: "Condition-Based Maintenance",
     desc: "Assessment of PLC, SCADA, sensors, communications and alarm history to identify practical maintenance priorities and phased improvements.",
     target: "Manufacturing sites and utility operators with limited in-house control engineering resources",
+    overview: "The assessment starts with the equipment and records already available at the site. PLC and HMI backups, SCADA alarms, sensor trends, communication faults and maintenance history are reviewed to define priority actions without requiring a large monitoring platform first.",
     problems: [
       "Program and PC backups are incomplete or their locations are unclear.",
       "The same alarms repeat without a clear cause or action history.",
@@ -42,6 +44,7 @@ export const englishServices = [
     eyebrow: "Operational Data Utilization",
     desc: "CIMON SCADA screens, alarms, trends, reports and communications improved so operating data can support troubleshooting and maintenance.",
     target: "Water treatment, industrial facilities and their existing automation or maintenance partners",
+    overview: "Existing CIMON SCADA and PLC systems can often be improved in stages. We review screens, tag quality, alarm history, trends, reports and instrument communications so operators can use existing data for troubleshooting, reporting and preventive checks.",
     problems: ["Alarm causes and action history are difficult to trace.", "Operators repeatedly prepare reports from dispersed data.", "New meters and sensors must be integrated into existing screens."],
     scope: ["CIMON SCADA screen and tag improvements", "Alarm history, trends, logging and reporting", "PLC and instrument communication checks", "Runtime and maintenance monitoring"],
     deliver: ["Screen, tag and alarm change record", "Communication and display verification", "Backup and handover material"],
@@ -49,10 +52,11 @@ export const englishServices = [
   },
   {
     slug: "plc",
-    title: "PLC / HMI Modernization & Migration",
+    title: "Obsolete PLC & HMI Replacement, Modernization & Migration",
     eyebrow: "Control System Modernization",
     desc: "PLC and operator interface improvements for aging equipment, communication issues and undocumented changes, using a controlled backup and recovery plan.",
     target: "Manufacturers with aging control equipment and automation/electrical service partners",
+    overview: "Obsolete PLC replacement requires more than selecting a new controller. Source programs, I/O, communications, HMI screens, operating sequences, downtime and recovery steps are reviewed before the migration scope is agreed.",
     problems: ["Existing PLCs or HMIs are obsolete.", "Change history is missing, making troubleshooting difficult.", "New instruments must communicate with existing PLCs."],
     scope: ["Program, I/O, communication and sequence review", "Omron and LS Electric PLC modifications", "Pro-face and EasyView HMI configuration", "Backup, migration and recovery planning"],
     deliver: ["Defined change scope and I/O/communication findings", "Agreed program backup and change record", "Migration and commissioning record"],
@@ -85,8 +89,8 @@ export const englishGuides = [
   },
   {
     slug: "legacy-plc-replacement",
-    title: "What to check before replacing an obsolete PLC or HMI",
-    desc: "A migration checklist covering source programs, I/O, communications, operating sequence, downtime and recovery planning.",
+    title: "Obsolete PLC Replacement & HMI Migration Checklist",
+    desc: "What to check before replacing an obsolete PLC or HMI, including source programs, I/O, communications, operating sequence, downtime and recovery planning.",
     service: "plc",
     sections: [
       ["A model number is not enough", "Replacement may involve the original program, I/O, connected drives and instruments, SCADA links and operator sequence—not just the controller hardware."],

@@ -8,8 +8,8 @@ import InquiryCTA from "@/components/features/InquiryCTA";
 
 export const dynamic = "force-dynamic";
 export const metadata = englishPageMetadata(
-  "Legacy Semiconductor Equipment Retrofit, PLC & SCADA Engineering",
-  "Korea-based engineering support for legacy semiconductor equipment retrofit, life extension, PLC/HMI modernization, CIMON SCADA and preventive control-system diagnostics.",
+  "Legacy Semiconductor Equipment Support & Retrofit | PLC & SCADA",
+  "Korea-based support for legacy semiconductor equipment retrofit and refurbishment, obsolete PLC replacement, HMI modernization, CIMON SCADA and preventive control-system diagnostics.",
   "/en",
 );
 
@@ -23,9 +23,9 @@ export default async function EnglishHome() {
             <div>
               <p className="eyebrow">JUNgenius · Industrial Engineering in Korea</p>
               <h1>
-                Extend the life of existing equipment.
+                Legacy semiconductor equipment support.
                 <br />
-                <span>Improve controls with a practical scope.</span>
+                <span>Retrofit, refurbish and improve controls.</span>
               </h1>
               <p className="lead">
                 Retrofit and life-extension support for legacy semiconductor equipment,
@@ -39,7 +39,7 @@ export default async function EnglishHome() {
             <aside className="field-panel">
               <p className="eyebrow">Engineering services built around the field condition</p>
               <Link href="/en/services/semiconductor">
-                <strong>Legacy Semiconductor Equipment</strong>
+                <strong>Legacy Semiconductor Equipment Support</strong>
                 <span>Retrofit · Refurbishment · Life Extension →</span>
               </Link>
               <Link href="/en/services/automation">
@@ -62,7 +62,7 @@ export default async function EnglishHome() {
 
       <section className="section section-alt">
         <div className="container">
-          <div className="section-heading"><div><p className="eyebrow">What we do</p><h2>Engineering services for real equipment problems</h2><p>We first review the existing system and define the smallest practical improvement scope.</p></div></div>
+          <div className="section-heading"><div><p className="eyebrow">What we do</p><h2>Engineering services for real equipment problems</h2><p>We first review the existing system and define the smallest practical improvement scope. Start with <Link href="/en/services/semiconductor">legacy semiconductor equipment support</Link> or review the <Link href="/en/support/legacy-plc-replacement">obsolete PLC replacement checklist</Link>.</p></div></div>
           <ServiceCards locale="en" />
         </div>
       </section>
